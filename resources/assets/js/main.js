@@ -9,6 +9,10 @@ jQuery(document).ready(function () {
 
     fireEventsWhenOrdered(table);
 
+    highlightHighestOfCol(table);
+});
+
+function highlightHighestOfCol(table){
     table.columns().every(function(colIndex) {
         if(colIndex <3){
             return;
@@ -18,8 +22,6 @@ jQuery(document).ready(function () {
             // remove duplicates
             return !pos || item != arr[pos - 1];
         })[0];
-
-        console.log(highest);
 
         table.rows().every(function (rowIndex) {
             var currCell = table.cell({
@@ -32,12 +34,18 @@ jQuery(document).ready(function () {
             }
         });
     });
-});
+}
 
 function fireEventsWhenOrdered(table){
-    table.on('row-reordered', function(){
-        console.log("OMG");
-        adjustRowHeightToDiff(this);
+    jQuery('#ranktable').on("order.dt", function(){
+        resetRowHeight(table);
+        adjustRowHeightToDiff(table);
+    });
+}
+
+function resetRowHeight(table){
+    table.rows().every(function(index){
+        jQuery(this.node()).height(55.1166);
     });
 }
 
@@ -54,7 +62,7 @@ function adjustRowHeightToDiff(table){
             var gap = Math.abs(jQuery(currSumCell).text() - jQuery(prevSumCell).text());
             var currRowHeight = jQuery(this.node()).height();
 
-            jQuery(this.node()).height(currRowHeight+(gap*4));
+            jQuery(this.node()).height(currRowHeight+gap*4);
         }
 
         prevSumCell = table.cell({
