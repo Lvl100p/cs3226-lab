@@ -5,7 +5,8 @@ require('laravel-elixir-vue-2');
 elixir((mix) => {
 	    mix.styles([
 		    'main.css',
-			'flags.css'
+			'flags.css',
+            'bs-callout.css'
 		]);
 
 	    mix.scripts([

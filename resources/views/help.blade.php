@@ -1,60 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template')
 
-    <title>CS3226 Lab</title>
+@section('page-title', 'CS3226 Lab: Help')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('content-title', 'CS3226 Lab: Help')
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url(asset('css/main.css')) }}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
-    <link rel="icon" type="image/png" href="https://visualgo.net/ivle/public/img/omega.png">
-</head>
-<style>
-    .gold {
-        background-color: gold;
-    }
-
-    .silver {
-        background-color: silver;
-    }
-
-    .bronze {
-        background-color: #cd7f32;
-    }
-
-    .last {
-        background-color: pink;
-    }
-
-    .empty {
-        background-color: pink;
-    }
-
-    .highlighted {
-        background-color: orange;
-    }
-
-    table.dataTable tbody td {
-        vertical-align: bottom;
-    }
-</style>
-<body class="center position-ref full-height">
-<header>
-    <h6 class="top-left links">CS3233 Ranklist 2017</h6>
-</header>
-
-<nav class="top-right links">
-    <a href="{{ url('/') }}">Home</a>
-    <a href="{{ url('/help') }}">Help</a>
-</nav>
-
-<main>
+@section('content')
     <section>
 
         <h3>Overview</h3>
@@ -202,7 +152,4 @@
         </ol>
 
     </section>
-</main>
-
-</body>
-</html>
+@endsection

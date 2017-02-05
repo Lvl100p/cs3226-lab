@@ -11,18 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index', [
-        'students' => factory(App\Student::class, 100)->make()
-    ]);
-});
+Route::get('/', 'StudentController@index');
 
 Route::get('/help', function() {
     return view('help');
 });
 
-Route::get('/students/1', function(){
-    return view('student1', [
-        'student' => factory(App\Student::class, 1)->make()
-    ]);
-});
+Route::resource('students', 'StudentController', ['only' => ['index', 'show']]);

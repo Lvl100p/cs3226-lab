@@ -24,6 +24,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Student::class, function(Faker\Generator $faker){
+    $rank = $faker->randomNumber(2);
+    $nickname = $faker->userName;
+    $name = $faker->name;
+    $flag = $faker->countryCode;
     $mc = $faker->randomDigit;
     $tc = $faker->randomDigit;
     $spe = $mc + $tc;
@@ -35,9 +39,10 @@ $factory->define(App\Student::class, function(Faker\Generator $faker){
 
     $sum = $spe + $dil;
     return [
-        'rank' => $faker->randomDigit,
-        'name' => $faker->name,
-        'flag' => $faker->countryCode,
+        'rank' => $rank,
+        'nickname' => $nickname,
+        'name' => $name,
+        'flag' => $flag,
         'mc' => $mc,
         'tc' => $tc,
         'spe'  => $spe,

@@ -1,32 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template')
 
-    <title>CS3226 Lab</title>
+@section('page-title', 'CS3226 Lab: Student Details')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('content-title', 'CS3226 Lab: Student Details')
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url(asset('css/main.css')) }}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.semanticui.min.css">
+@section('stylesheet')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css">
+@endsection
 
-</head>
-<body class="center position-ref full-height">
-<header>
-    <h6 class="top-left links">CS3233 Ranklist 2017</h6>
-</header>
+@section('script')
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#ranktable').DataTable();
+        });
+    </script>
+@endsection
 
-<nav class="top-right links">
-    <a href="{{ url('/') }}">Home</a>
-    <a href="{{ url('/help') }}">Help</a>
-</nav>
-
-<main>
+@section('content')
     <section id="summary">
         <h1>{{$student->name}}
             <small>in CS3233 S2 AY 2016/17</small>
@@ -56,7 +48,7 @@
 
     <section id="detailed-scores">
         <h2>Detailed Scores</h2>
-        <table id="ranktable" class="ui selectable celled table" width="100%" cellspacing="0">
+        <table id="ranktable" class="table table-striped table-responsive" width="100%" cellspacing="0">
             <thead>
             <tr>
                 <th>Component</th>
@@ -185,74 +177,37 @@
             <li>Quick starter</li>
             <li>Active in class 2/3</li>
         </ol>
+
     </section>
 
     <p>&nbsp;</p>
 
     <section id="comments">
         <h2>Public Comments</h2>
-        <div class="ui positive icon message">
-            <i class="trophy icon"></i>
-            <div class="content">
-                <div class="header">
-                    IOI Silver Medalist 2015
-                </div>
-                <p>Own like a pro!</p>
-            </div>
+
+        <div class="bs-callout bs-callout-success">
+            <h4>IOI Silver Medalist 2015</h4>
+            Own like a pro!
         </div>
 
-        <div class="ui positive icon message">
-            <i class="trophy icon"></i>
-            <div class="content">
-                <div class="header">
-                    ICPC Jakarta 2016 runner-up (TeamTam)
-                </div>
-                <p>Own like a pro!</p>
-            </div>
+        <div class="bs-callout bs-callout-success">
+            <h4>ICPC Jakarta 2016 runner-up (TeamTam)</h4>
+            Own like a pro!
         </div>
 
-        <div class="ui icon message">
-            <i class="idea icon"></i>
-            <div class="content">
-                <div class="header">
-                    Active in Class
-                </div>
-                <ul>
-                    <li>Answer 1Q in L1</li>
-                    <li>Answer 1Q on Week02</li>
-                </ul>
-            </div>
+        <div class="bs-callout bs-callout-info">
+            <h4>Active in Class</h4>
+            <ul>
+                <li>Answer 1Q in L1</li>
+                <li>Answer 1Q on Week02</li>
+            </ul>
         </div>
 
-        <div class="ui negative icon message">
-            <i class="wait icon"></i>
-            <div class="content">
-                <div class="header">
-                    Late with HW1 once!
-                </div>
-                <p>Tsk Tsk</p>
-            </div>
+        <div class="bs-callout bs-callout-danger">
+            <h4>Late with HW1 once!</h4>
+            Tsk Tsk
         </div>
 
     </section>
 
-    <p>&nbsp;</p>
-
-    <hr/>
-
-    <footer class="center">
-        Copyright @ 2017 kfwong
-    </footer>
-</main>
-</body>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.semanticui.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery('#ranktable').DataTable();
-    });
-</script>
-</html>
+@endsection
