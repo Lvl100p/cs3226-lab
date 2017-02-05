@@ -12,7 +12,7 @@ html, body {
 }
 
 .flex-center {
-    align-items: center;
+    /*align-items: center;*/
     display: flex;
     justify-content: center;
 }
@@ -57,4 +57,33 @@ main {
 
 table {
     font-family: Helvetica;
+}
+
+.form td:first-child{
+    font-weight: bold;
+    width: 15%;
+}
+
+.flag{
+    vertical-align: middle;
+}
+
+.highest-sum{
+    background-color: gold;
+}
+
+.second-sum{
+    background-color: silver;
+}
+
+.third-sum{
+    background-color: #cd7f32;
+}
+
+.lowest-sum{
+    background-color: pink;
+}
+
+.highest-of-column{
+    background-color: orange;
 }

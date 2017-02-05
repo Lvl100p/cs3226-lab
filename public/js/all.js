@@ -108,3 +108,4 @@ function highlightSumRow(table){
         }
     });
 }
+//# sourceMappingURL=all.js.map
