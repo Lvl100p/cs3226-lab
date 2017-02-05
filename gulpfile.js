@@ -14,4 +14,6 @@ elixir((mix) => {
 		]);
 
 	    mix.copy('resources/assets/img', 'public/img');
+
+        mix.copy('resources/assets/js/radarChart.js', 'public/js/radarChart.js');
 });

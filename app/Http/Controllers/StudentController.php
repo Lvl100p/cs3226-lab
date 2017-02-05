@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function index(){
-        $students = factory(Student::class, 100)->make();
+        $students = Student::all();
         return view('index', [
             'students' => $students
         ]);
@@ -16,7 +16,7 @@ class StudentController extends Controller
 
     public function show($id){
 
-        $student = factory(Student::class, 1)->make();
+        $student = Student::find($id);
 
         return view('detail', [
             'student' => $student

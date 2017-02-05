@@ -11,9 +11,13 @@
 @section('script')
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js"></script>
+    <script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+    <script type="text/javascript" src="{{ url(asset('js/radarChart.js')) }}"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             jQuery('#ranktable').DataTable();
+
+            radarChart({{$student->mc}}, {{$student->tc}}, {{$student->hw}}, {{$student->bs}}, {{$student->ks}}, {{$student->ac}});
         });
     </script>
 @endsection
@@ -24,24 +28,31 @@
             <small>in CS3233 S2 AY 2016/17</small>
         </h1>
 
-        <table class="ui table form">
-            <tr>
-                <td>Kattis account</td>
-                <td>aguss787</td>
-            </tr>
-            <tr>
-                <td>SPE(ed) component</td>
-                <td>4 + 0 = 4</td>
-            </tr>
-            <tr>
-                <td>DIL(igence) component</td>
-                <td>1 + 1 + 1 + 4 = 7</td>
-            </tr>
-            <tr>
-                <td>Sum</td>
-                <td>SPE + DIL = 4 + 7 = 11</td>
-            </tr>
-        </table>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6"><canvas id="radarChart" width="550", height="550"></canvas></div>
+                <div class="col-md-6 vcenter" style="height: 500px;">
+                    <table class="table">
+                        <tr>
+                            <td>Kattis account</td>
+                            <td>{{$student->nickname}}</td>
+                        </tr>
+                        <tr>
+                            <td>SPE(ed) component</td>
+                            <td>{{$student->mc}} + {{$student->tc}} = {{$student->spe}}</td>
+                        </tr>
+                        <tr>
+                            <td>DIL(igence) component</td>
+                            <td>{{$student->hw}} + {{$student->bs}} + {{$student->ks}} + {{$student->ac}} = {{$student->dil}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sum</td>
+                            <td>SPE + DIL = {{$student->spe}} + {{$student->dil}} = {{$student->sum}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
 
     <p>&nbsp;</p>

@@ -39,8 +39,8 @@
                 <tr>
                     <td>{{$student->rank}}</td>
                     <td class="hidden-xs"><img src="#" class="flag flag-{{ strtolower($student->flag) }}"/> {{$student->flag}}</td>
-                    <td class="hidden-xs"><a href="/students/1">{{$student->name}}</a></td>
-                    <td class="visible-xs"><a href="/students/1">{{$student->nickname}}</a></td>
+                    <td class="hidden-xs"><a href="/students/{{$student->id}}">{{$student->name}}</a></td>
+                    <td class="visible-xs"><a href="/students/{{$student->id}}">{{$student->nickname}}</a></td>
                     <td class="hidden-xs">{{$student->mc}}</td>
                     <td class="hidden-xs">{{$student->tc}}</td>
                     <td>{{$student->spe}}</td>
