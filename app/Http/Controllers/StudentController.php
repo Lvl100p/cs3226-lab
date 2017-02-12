@@ -77,4 +77,22 @@ class StudentController extends Controller
             'student' => $student
         ]);
     }
+
+    public function create()
+    {
+        return view ('create');
+	}
+
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+	   'nickname' => 'required|between:5,30',
+	   'fullname' => 'required|between:5,30',
+	   'kattisacc' => 'required|between:5,30',
+	   'nationality' => 'required',
+	   ]);
+
+    }
+
+
 }
