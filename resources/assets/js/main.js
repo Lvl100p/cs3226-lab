@@ -3,13 +3,13 @@ jQuery(document).ready(function () {
         "paging": false
     });
 
-    highlightSumRow(table)
+    //highlightSumRow(table)
 
     adjustRowHeightToDiff(table);
 
     fireEventsWhenOrdered(table);
 
-    highlightHighestOfCol(table);
+    //highlightHighestOfCol(table);
 });
 
 function highlightHighestOfCol(table){

@@ -36,19 +36,19 @@
             </thead>
             <tbody>
             @foreach($students as $student)
-                <tr>
+                <tr class="{{$student->sumCss}}">
                     <td>{{$student->rank}}</td>
                     <td class="hidden-xs"><img src="#" class="flag flag-{{ strtolower($student->flag) }}"/> {{$student->flag}}</td>
                     <td class="hidden-xs"><a href="/students/{{$student->id}}">{{$student->name}}</a></td>
                     <td class="visible-xs"><a href="/students/{{$student->id}}">{{$student->nickname}}</a></td>
-                    <td class="hidden-xs">{{$student->mc}}</td>
-                    <td class="hidden-xs">{{$student->tc}}</td>
-                    <td>{{$student->spe}}</td>
-                    <td class="hidden-xs">{{$student->hw}}</td>
-                    <td class="hidden-xs">{{$student->bs}}</td>
-                    <td class="hidden-xs">{{$student->ks}}</td>
-                    <td class="hidden-xs">{{$student->ac}}</td>
-                    <td>{{$student->dil}}</td>
+                    <td class="{{$student->mcCss}} hidden-xs">{{$student->mc}}</td>
+                    <td class="{{$student->tcCss}} hidden-xs">{{$student->tc}}</td>
+                    <td class="{{$student->speCss}}">{{$student->spe}}</td>
+                    <td class="{{$student->hwCss}} hidden-xs">{{$student->hw}}</td>
+                    <td class="{{$student->bsCss}} hidden-xs">{{$student->bs}}</td>
+                    <td class="{{$student->ksCss}} hidden-xs">{{$student->ks}}</td>
+                    <td class="{{$student->acCss}} hidden-xs">{{$student->ac}}</td>
+                    <td class="{{$student->dilCss}}">{{$student->dil}}</td>
                     <td>{{$student->sum}}</td>
                 </tr>
             @endforeach
