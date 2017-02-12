@@ -17,8 +17,4 @@ Route::get('/help', function() {
     return view('help');
 });
 
-Route::resource('students', 'StudentController', ['only' => ['index', 'show']]);
-
-Route::get('/create', StudentController@create);
-
-Route::post('post', StudentController@store);
+Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);

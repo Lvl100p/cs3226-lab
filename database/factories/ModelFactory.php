@@ -38,6 +38,7 @@ $factory->define(App\Student::class, function(Faker\Generator $faker){
     $dil  = $hw + $bs + $ks + $ac;
 
     $sum = $spe + $dil;
+
     return [
         'rank' => $rank,
         'nickname' => $nickname,

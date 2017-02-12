@@ -18,6 +18,11 @@
             jQuery('#ranktable').DataTable();
 
             radarChart({{$student->mc}}, {{$student->tc}}, {{$student->hw}}, {{$student->bs}}, {{$student->ks}}, {{$student->ac}});
+
+        });
+
+        jQuery('#form-delete').on('submit', function(){
+            return confirm("Are you sure you want to delete?");
         });
     </script>
 @endsection
@@ -33,6 +38,9 @@
                 <div class="col-md-6"><canvas id="radarChart" width="550", height="550"></canvas></div>
                 <div class="col-md-6 vcenter" style="height: 500px;">
                     <table class="table">
+                        <tr>
+                            <td><img src="/img/uploads/{{$student->id}}.png" width="200" height="200"/> </td>
+                        </tr>
                         <tr>
                             <td>Kattis account</td>
                             <td>{{$student->nickname}}</td>
@@ -219,6 +227,12 @@
             Tsk Tsk
         </div>
 
+    </section>
+
+    <section id="delete">
+        {!! Form::model($student, ['action' => ['StudentController@destroy', $student->id], 'method' => 'delete', 'id'=>'form-delete']) !!}
+        {!! Form::submit('Delete', ['class'=>'btn btn-danger', 'id'=>'btn-delete']) !!}
+        {!! Form::close() !!}
     </section>
 
 @endsection
