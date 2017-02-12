@@ -18,3 +18,7 @@ Route::get('/help', function() {
 });
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show']]);
+
+Route::get('/create', StudentController@create);
+
+Route::post('post', StudentController@store);
