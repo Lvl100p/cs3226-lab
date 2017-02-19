@@ -5,18 +5,19 @@
 @section('content-title', 'CS3226 Lab: Rank List')
 
 @section('stylesheet')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css">
+    {{ Html::style('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css')}}
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css') }}
+    {{ Html::style('css/flags.css')}}
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js"></script>
-    <script type="text/javascript" src="{{ url(asset('js/all.js')) }}"></script>
+    {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
+    {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
 @endsection
 
 @section('content')
     <section>
-        <table id="ranktable" class="table table-striped table-responsive" width="100%" cellspacing="0">
+        <table id="ranktable" class="table table-hover table-responsive" width="100%" cellspacing="0">
             <thead>
             <tr>
                 <th>Rank</th>
@@ -37,19 +38,42 @@
             <tbody>
             @foreach($students as $student)
                 <tr class="{{$student->sumCss}}">
-                    <td>{{$student->rank}}</td>
-                    <td class="hidden-xs"><img src="#" class="flag flag-{{ strtolower($student->flag) }}"/> {{$student->flag}}</td>
-                    <td class="hidden-xs"><a href="/students/{{$student->id}}">{{$student->name}}</a></td>
+                    <td>
+                        <span class="rank">{{$student->rank}}</span>
+                    </td>
+                    <td class="hidden-xs"><i class="flag flag-{{ strtolower($student->flag) }}"></i></td>
+                    <td class="hidden-xs">
+                        <a class="hint--top hint--bounce hint--error" aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin." href="#"><img class="avatar" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/></a>
+                        <strong><a href="/students/{{$student->id}}"><span class="student-name">{{$student->name}}</span></a></strong>
+                    </td>
                     <td class="visible-xs"><a href="/students/{{$student->id}}">{{$student->nickname}}</a></td>
-                    <td class="{{$student->mcCss}} hidden-xs">{{$student->mc}}</td>
-                    <td class="{{$student->tcCss}} hidden-xs">{{$student->tc}}</td>
-                    <td class="{{$student->speCss}}">{{$student->spe}}</td>
-                    <td class="{{$student->hwCss}} hidden-xs">{{$student->hw}}</td>
-                    <td class="{{$student->bsCss}} hidden-xs">{{$student->bs}}</td>
-                    <td class="{{$student->ksCss}} hidden-xs">{{$student->ks}}</td>
-                    <td class="{{$student->acCss}} hidden-xs">{{$student->ac}}</td>
-                    <td class="{{$student->dilCss}}">{{$student->dil}}</td>
-                    <td>{{$student->sum}}</td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->mcCss}} score">{{$student->mc}}</span>
+                    </td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->tcCss}} score">{{$student->tc}}</span>
+                    </td>
+                    <td>
+                        <span class="{{$student->speCss}} score">{{$student->spe}}</span>
+                    </td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->hwCss}} score">{{$student->hw}}</span>
+                    </td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->bsCss}} score">{{$student->bs}}</span>
+                    </td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->ksCss}} score">{{$student->ks}}</span>
+                    </td>
+                    <td class="hidden-xs">
+                        <span class="{{$student->acCss}} score">{{$student->ac}}</span>
+                    </td>
+                    <td>
+                        <span class="{{$student->dilCss}} score">{{$student->dil}}</span>
+                    </td>
+                    <td>
+                        <span class="score">{{$student->sum}}</span>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
