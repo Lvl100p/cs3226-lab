@@ -11,7 +11,6 @@
 @section('script')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js"></script>
-<script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="{{ url(asset('js/radarChart.js')) }}"></script>
 

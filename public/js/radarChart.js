@@ -1,208 +1,147 @@
 function radarChart(mc, tc, hw, bs, ks, ac){
-    var canvas = document.getElementById("radarChart");
-    var stage = new createjs.Stage(canvas);
+    var ctx = $("#radarChart");
+    var data = {
+        labels: ["MC", "TC", "HW", "Bs", "KS", "Ac"],
+        datasets: [
+            {
+                label: "Student Scores",
+                backgroundColor: "rgba(240, 173, 78, 0.49)",
+                borderColor: "rgb(240, 173, 78)",
+                pointBackgroundColor: "rgb(240, 173, 78)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "rgba(240, 173, 78, 0.49)",
+                pointHoverBorderColor: "rgb(240, 173, 78)",
+                data: [mc, tc, hw, bs, ks, ac]
+            }]
+    };
+    var radarOptions = {
 
-    var a = new createjs.Shape();
-    a.graphics.beginFill("#80000022");
-    a.graphics.drawPolyStar(300, 300, 200, 6, 0, 0);
-    a.graphics.beginFill("#80000022");
-    a.graphics.drawPolyStar(300, 300, 180, 6, 0, 0);
-    a.graphics.beginFill("#00800022");
-    a.graphics.drawPolyStar(300, 300, 160, 6, 0, 0);
-    a.graphics.beginFill("#00800022");
-    a.graphics.drawPolyStar(300, 300, 140, 6, 0, 0);
-    a.graphics.beginFill("#00008022");
-    a.graphics.drawPolyStar(300, 300, 120, 6, 0, 0);
-    a.graphics.beginFill("#00008022");
-    a.graphics.drawPolyStar(300, 300, 100, 6, 0, 0);
-    a.graphics.beginFill("#00000022");
-    a.graphics.drawPolyStar(300, 300, 80, 6, 0, 0);
-    a.graphics.beginFill("#00000022");
-    a.graphics.drawPolyStar(300, 300, 60, 6, 0, 0);
-    a.graphics.beginFill("#00000022");
-    a.graphics.drawPolyStar(300, 300, 40, 6, 0, 0);
-    a.graphics.beginFill("#00000022");
-    a.graphics.drawPolyStar(300, 300, 20, 6, 0, 0);
+        //Boolean - If we show the scale above the chart data
+        scaleOverlay : false,
 
-    var blinecolor = "#00000022";
-    var b = new createjs.Shape();
-    b.graphics.setStrokeStyle(2);
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(100, 300);
-    b.graphics.endStroke();
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride : false,
 
-    b.graphics.moveTo(300, 300);
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps : null,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth : null,
+        //Number - The centre starting value
+        scaleStartValue : null,
 
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(200, 125);
-    b.graphics.endStroke();
+        //Boolean - Whether to show lines for each scale point
+        scaleShowLine : true,
 
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(400, 125);
-    b.graphics.endStroke();
+        //String - Colour of the scale line
+        scaleLineColor : "#999",
 
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(500, 300);
-    b.graphics.endStroke();
+        //Number - Pixel width of the scale line
+        scaleLineWidth : 1,
 
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(400, 475);
-    b.graphics.endStroke();
+        //Boolean - Whether to show labels on the scale
+        scaleShowLabels : false,
 
-    b.graphics.beginStroke(blinecolor);
-    b.graphics.lineTo(300, 300);
-    b.graphics.lineTo(200, 475);
-    b.graphics.endStroke();
+        //Interpolated JS string - can access value
+        scaleLabel : "<%=value%>",
 
-    stage.addChild(a);
-    stage.addChild(b);
+        //String - Scale label font declaration for the scale label
+        scaleFontFamily : "'Arial'",
 
-    var centerX = 300;
-    var centerY = 300;
-    var radius = 200;
+        //Number - Scale label font size in pixels
+        scaleFontSize : 12,
 
+        //String - Scale label font weight style
+        scaleFontStyle : "normal",
 
-    var mcX = radius * mc/10 * (1/2);
-    var mcY = radius * mc/10 * Math.sqrt(3)/2;
+        //String - Scale label font colour
+        scaleFontColor : "#666",
 
+        //Boolean - Show a backdrop to the scale label
+        scaleShowLabelBackdrop : true,
 
-    var tcX = radius * tc/10 * 1;
-    var tcY = radius * tc/10 * 0;
+        //String - The colour of the label backdrop
+        scaleBackdropColor : "rgba(255,255,255,0.75)",
 
+        //Number - The backdrop padding above & below the label in pixels
+        scaleBackdropPaddingY : 2,
 
-    var hwX = radius * hw/10 * (1/2);
-    var hwY = radius * hw/10 * -Math.sqrt(3)/2;
+        //Number - The backdrop padding to the side of the label in pixels
+        scaleBackdropPaddingX : 2,
 
+        //Boolean - Whether we show the angle lines out of the radar
+        angleShowLineOut : true,
 
-    var bsX = radius * bs/10 * (-1/2);
-    var bsY = radius * bs/10 * -Math.sqrt(3)/2;
+        //String - Colour of the angle line
+        angleLineColor : "rgba(255,255,255,0.3)",
 
+        //Number - Pixel width of the angle line
+        angleLineWidth : 1,
 
-    var ksX = radius * ks/10 * (-1);
-    var ksY = radius * ks/10 * 0;
+        //String - Point label font declaration
+        pointLabelFontFamily : "'Arial'",
 
+        //String - Point label font weight
+        pointLabelFontStyle : "normal",
 
-    var acX = radius * ac/10 * (-1/2);
-    var acY = radius * ac/10 * Math.sqrt(3)/2;
+        //Number - Point label font size in pixels
+        pointLabelFontSize : 12,
 
-    var c = new createjs.Shape();
-    c.graphics.setStrokeStyle(1);
-    c.graphics.beginStroke("black");
-    c.graphics.beginFill("#00000088");
-    c.graphics.lineTo(centerX+mcX, centerY-mcY);
-    c.graphics.lineTo(centerX+tcX, centerY-tcY);
-    c.graphics.lineTo(centerX+hwX, centerY-hwY);
-    c.graphics.lineTo(centerX+bsX, centerY-bsY);
-    c.graphics.lineTo(centerX+ksX, centerY-ksY);
-    c.graphics.lineTo(centerX+acX, centerY-acY);
+        //String - Point label font colour
+        pointLabelFontColor : "#EFEFEF",
 
-    stage.addChild(c);
+        //Boolean - Whether to show a dot for each point
+        pointDot : true,
 
-    var mcLabel = new createjs.Text("MC", "24px Arial", "#000");
-    mcLabel.x = 400;
-    mcLabel.y = 100;
-    stage.addChild(mcLabel);
+        //Number - Radius of each point dot in pixels
+        pointDotRadius : 3,
 
-    var tcLabel = new createjs.Text("TC", "24px Arial", "#000");
-    tcLabel.x = 510;
-    tcLabel.y = 285;
-    stage.addChild(tcLabel);
+        //Number - Pixel width of point dot stroke
+        pointDotStrokeWidth : 1,
 
-    var hwLabel = new createjs.Text("HW", "24px Arial", "#000");
-    hwLabel.x = 400;
-    hwLabel.y = 490;
-    stage.addChild(hwLabel);
+        //Boolean - Whether to show a stroke for datasets
+        datasetStroke : true,
 
-    var bsLabel = new createjs.Text("BS", "24px Arial", "#000");
-    bsLabel.x = 180;
-    bsLabel.y = 490;
-    stage.addChild(bsLabel);
+        //Number - Pixel width of dataset stroke
+        datasetStrokeWidth : 1,
 
-    var ksLabel = new createjs.Text("KS", "24px Arial", "#000");
-    ksLabel.x = 60;
-    ksLabel.y = 285;
-    stage.addChild(ksLabel);
+        //Boolean - Whether to fill the dataset with a colour
+        datasetFill : true,
 
-    var acLabel = new createjs.Text("AC", "24px Arial", "#000");
-    acLabel.x = 180;
-    acLabel.y = 100;
-    stage.addChild(acLabel);
+        //Boolean - Whether to animate the chart
+        animation : true,
 
-    stage.update();
+        //Number - Number of animation steps
+        animationSteps : 60,
 
-    var hitBox = new createjs.Shape();
-    hitBox.graphics.beginFill("white").drawRect(0, 0, 50, 50);
-    mcLabel.hitArea = hitBox;
-    tcLabel.hitArea = hitBox;
-    hwLabel.hitArea = hitBox;
-    bsLabel.hitArea = hitBox;
-    ksLabel.hitArea = hitBox;
-    acLabel.hitArea = hitBox;
+        //String - Animation easing effect
+        animationEasing : "easeOutQuart",
 
-    mcLabel.addEventListener("mouseover", function() {
-        mcLabel.text= mc;
-        stage.update();
+        //Function - Fires when the animation is complete
+        onAnimationComplete : null
+
+    }
+    var myChart =new Chart(ctx, {
+        type: 'radar',
+        data: data,
+        //String - Colour of the scale line
+        scaleLineColor : "#999",
+
+        //Number - Pixel width of the scale line
+        scaleLineWidth : 1,
+        options: {
+            scale: {
+                gridLines:{
+                    color: "rgba(255,255,255, 0.2)"
+                },
+                angleLines:{
+                    color: "rgba(255,255,255, 0.2)"
+                },
+                ticks: {
+                    beginAtZero: true
+                }
+            },
+            responsive: true
+        }
     });
-
-    mcLabel.addEventListener("mouseout", function() {
-        mcLabel.text= "MC";
-        stage.update();
-    });
-
-    tcLabel.addEventListener("mouseover", function() {
-        tcLabel.text= tc;
-        stage.update();
-    });
-
-    tcLabel.addEventListener("mouseout", function() {
-        tcLabel.text= "TC";
-        stage.update();
-    });
-
-    hwLabel.addEventListener("mouseover", function() {
-        hwLabel.text= hw;
-        stage.update();
-    });
-
-    hwLabel.addEventListener("mouseout", function() {
-        hwLabel.text= "HW";
-        stage.update();
-    });
-
-    bsLabel.addEventListener("mouseover", function() {
-        bsLabel.text= bs;
-        stage.update();
-    });
-
-    bsLabel.addEventListener("mouseout", function() {
-        bsLabel.text= "BS";
-        stage.update();
-    });
-
-    ksLabel.addEventListener("mouseover", function() {
-        ksLabel.text= ks;
-        stage.update();
-    });
-
-    ksLabel.addEventListener("mouseout", function() {
-        ksLabel.text= "KS";
-        stage.update();
-    });
-
-    acLabel.addEventListener("mouseover", function() {
-        acLabel.text= ac;
-        stage.update();
-    });
-
-    acLabel.addEventListener("mouseout", function() {
-        acLabel.text= "AC";
-        stage.update();
-    });
-
-    stage.enableMouseOver(20);
 }
