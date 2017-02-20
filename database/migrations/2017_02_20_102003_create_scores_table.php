@@ -14,12 +14,12 @@ class CreateScoresTable extends Migration
     public function up()
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->integer('id');
+            $table->integer('student_id');
             $table->string('scoretype');
             $table->integer('week');
             $table->decimal('score', 2, 1);
             $table->timestamps();
-            $table->primary(['id', 'scoretype', 'week']);
+            $table->primary(['student_id', 'scoretype', 'week']);
         });
     }
 
