@@ -193,8 +193,13 @@ main {
     font-family: "Droid Sans Mono", monospace;
 }
 
-.parallax-container {
+.intro-parallax-container {
     min-height: 577px;
+    background: transparent;
+}
+
+.chart-parallax-container {
+    min-height: 300px;
     background: transparent;
 }
 

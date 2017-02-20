@@ -13,15 +13,65 @@
 @section('script')
     {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
     {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
+    {{ Html::script('http://code.highcharts.com/highcharts.js') }}
+    {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
     <script type="text/javascript">
-        $('.parallax-container').parallax();
+        $('.intro-parallax-container').parallax();
+        $('.chart-parallax-container').parallax();
+
         $('#ranktable').DataTable({
             "dom": "fartp",
-            "order": [[ 12, "desc" ]]
+            "order": [[12, "desc"]]
         });
         $('#ranktable_filter input').attr("placeholder", "Search here!")
+
+        Highcharts.chart('chart', {
+
+            title: {
+                text: 'Solar Employment Growth by Sector, 2010-2016'
+            },
+
+            subtitle: {
+                text: 'Source: thesolarfoundation.com'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            plotOptions: {
+                series: {
+                    pointStart: 2010
+                }
+            },
+
+            series: [{
+                name: 'Installation',
+                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+            }, {
+                name: 'Manufacturing',
+                data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+            }, {
+                name: 'Sales & Distribution',
+                data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+            }, {
+                name: 'Project Development',
+                data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+            }, {
+                name: 'Other',
+                data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+            }]
+
+        });
     </script>
 @endsection
 
@@ -37,9 +87,7 @@
 			{{ Session::get('message') }}
 		</div>
     @endif
-
     <div class="parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
-
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
@@ -79,13 +127,17 @@
                 <img src="./img/intro.png" alt="top-three"/>
             </div>
 
-            <div class="intro col-md-4" style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
+            <div class="intro col-md-4"
+                 style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
                 <h1>CS3233 Competitive Programming Rank List</h1>
-                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited high school students who want
+
+                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited
+                    high school students who want
                     to compete in IOI (not just for NOI), and NUS students in general who aspire to excel in technical
                     interviews of top IT companies.</p>
 
-                <p style="text-align: justify;">It covers techniques for attacking and solving challenging* computational problems. Fundamental
+                <p style="text-align: justify;">It covers techniques for attacking and solving challenging*
+                    computational problems. Fundamental
                     algorithmic solving techniques covered include complete search, divide/reduce/transform and conquer,
                     greedy, dynamic programming, etc. Domain specific techniques like graph, mathematics-related, string
                     processing, and computational geometry will also be covered.</p>
@@ -159,5 +211,18 @@
             @endforeach
             </tbody>
         </table>
+    </section>
+
+    <div class="chart-parallax-container" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+         data-natural-height="577">
+        <div class="parallax-slider">
+            <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 150px; left: -150px;">
+                <img src="img/chart.png"/>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div id="chart"></div>
     </section>
 @endsection
