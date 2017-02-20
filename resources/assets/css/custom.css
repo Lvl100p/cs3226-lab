@@ -198,3 +198,15 @@ main {
     min-height: 577px;
     background: transparent;
 }
+
+#ranktable_filter input{
+    background-color: #000000dd;
+    width: 350px;
+    color: white;
+    padding: 10px;
+    border: solid 1px #ffffff88;
+}
+
+#ranktable_filter input::-moz-placeholder {  /* Firefox 19+ */
+    color: lightgray;
+}

@@ -17,7 +17,11 @@
     {{ Html::script('js/confetti.js') }}
     <script type="text/javascript">
         $('.parallax-container').parallax();
-
+        $('#ranktable').DataTable({
+            "dom": "fartp",
+            "order": [[ 12, "desc" ]]
+        });
+        $('#ranktable_filter input').attr("placeholder", "Search here!")
     </script>
 @endsection
 
