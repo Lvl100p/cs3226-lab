@@ -8,27 +8,38 @@
     <title>@yield('page-title', 'CS3226 Lab')</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {{ Html::style('css/bootstrap.css') }}
+    {{ Html::style('css/bootstrap-callout.css') }}
 
     <!-- child specific stylesheets -->
     @yield('stylesheet')
 
-    <link rel="stylesheet" href="{{ url(asset('css/all.css')) }}"/>
+    {{ Html::style('css/custom.css') }}
 
 </head>
-<body class="flex-center position-ref full-height">
-    @include('includes.header')
+<body class="container-fluid full-height">
 
-    @include('includes.nav')
+<div class="row">
+    <div class="col-md-12">
+        @include('includes.nav')
+    </div>
+</div>
 
-    <main>
+<div class="row">
+
+    <main class="col-md-offset-1 col-md-10 col-md-offset-1">
+
         @yield('content')
 
-        <hr/>
-
-        @include('includes.footer')
     </main>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <hr/>
+        @include('includes.footer')
+    </div>
+</div>
 
 </body>
 
