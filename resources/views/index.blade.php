@@ -13,9 +13,64 @@
 @section('script')
     {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
     {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
+    {{ Html::script('js/parallax.min.js') }}
+    <script type="text/javascript">
+        $('.parallax-container').parallax();
+
+    </script>
 @endsection
 
 @section('content')
+
+    <div class="parallax-container" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+         data-natural-height="577">
+        <div class="parallax-slider">
+            <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
+                <a class="hint--top hint--always hint--info"
+                   aria-label=" Meatball tail andouille shank filet mignon pastrami, &#10;ribeye spare ribs tenderloin chicken."
+                   href="#">
+                    <img class="avatar" src="https://api.adorable.io/avatars/50/{{$first_prizes[0]->nickname}}.png"/>
+                </a>
+                <strong><a href="/students/{{$first_prizes[0]->id}}"><span
+                                class="student-name">{{$first_prizes[0]->name}}</span></a></strong>
+            </div>
+            <div class="second-prizes" style="position: absolute; top: 480px; left: 750px;">
+                <a class="hint--top hint--always hint--error"
+                   aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
+                   href="#">
+                    <img class="avatar" src="https://api.adorable.io/avatars/50/{{$second_prizes[0]->nickname}}.png"/>
+                </a>
+                <strong><a href="/students/{{$second_prizes[0]->id}}"><span
+                                class="student-name">{{$second_prizes[0]->name}}</span></a></strong>
+            </div>
+            <div class="third-prizes" style="position: absolute; top: 400px; left: 1225px;">
+                <a class="hint--top hint--always hint--success"
+                   aria-label="Drumstick short loin venison, &#10;prosciutto tri-tip doner rump turkey. " href="#">
+                    <img class="avatar" src="https://api.adorable.io/avatars/50/{{$third_prizes[0]->nickname}}.png"/>
+                </a>
+                <strong><a href="/students/{{$third_prizes[0]->id}}"><span
+                                class="student-name">{{$third_prizes[0]->name}}</span></a></strong>
+            </div>
+            <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 300px">
+                <img src="./img/rank.png" alt="top-three"/>
+            </div>
+            <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 400px; left: -800px;">
+                <img src="./img/intro.png" alt="top-three"/>
+            </div>
+
+            <div class="intro col-md-4" style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
+                <h1>CS3233 Competitive Programming Rank List</h1>
+                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited high school students who want
+                    to compete in IOI (not just for NOI), and NUS students in general who aspire to excel in technical
+                    interviews of top IT companies.</p>
+
+                <p style="text-align: justify;">It covers techniques for attacking and solving challenging* computational problems. Fundamental
+                    algorithmic solving techniques covered include complete search, divide/reduce/transform and conquer,
+                    greedy, dynamic programming, etc. Domain specific techniques like graph, mathematics-related, string
+                    processing, and computational geometry will also be covered.</p>
+            </div>
+        </div>
+    </div>
     <section>
         <table id="ranktable" class="table table-hover table-responsive" width="100%" cellspacing="0">
             <thead>
@@ -43,8 +98,13 @@
                     </td>
                     <td class="hidden-xs"><i class="flag flag-{{ strtolower($student->flag) }}"></i></td>
                     <td class="hidden-xs">
-                        <a class="hint--top hint--bounce hint--error" aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin." href="#"><img class="avatar" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/></a>
-                        <strong><a href="/students/{{$student->id}}"><span class="student-name">{{$student->name}}</span></a></strong>
+                        <a class="hint--top hint--bounce hint--error"
+                           aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
+                           href="#">
+                            <img class="avatar" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/>
+                        </a>
+                        <strong><a href="/students/{{$student->id}}"><span
+                                        class="student-name">{{$student->name}}</span></a></strong>
                     </td>
                     <td class="visible-xs"><a href="/students/{{$student->id}}">{{$student->nickname}}</a></td>
                     <td class="hidden-xs">

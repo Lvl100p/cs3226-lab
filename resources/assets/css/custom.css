@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono');
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
 
 :root{
     --mighty-slate: #556270;
@@ -12,7 +13,8 @@
     --euphoria-burst: #f8ca00;
     --happy-balloon: #8a9b0f;
     --evening-cloud: #2e2633;
-    --shadow-dirt: #555152;
+    --deep-ocean: #005F6B;
+    --shadow-dirt: #2a2c31;
 }
 
 html, body {
@@ -21,6 +23,10 @@ html, body {
     height: 100vh;
     margin: 0;
     font-family: 'Droid Sans Mono', monospace;
+}
+
+h1{
+    font-family: 'Russo One', sans-serif;
 }
 
 .bg-color .mighty-slate {
@@ -100,6 +106,7 @@ main {
 }
 
 .flag {
+    margin-top: 10px;
     vertical-align: middle;
 }
 
@@ -107,16 +114,32 @@ main {
     background-color: var(--mighty-slate);
 }
 
+.highest-sum .score{
+    background-color: var(--evening-cloud);
+}
+
 .second-sum{
     background-color: var(--pacifica);
+}
+
+.second-sum .score{
+    background-color: var(--deep-ocean);
 }
 
 .third-sum{
     background-color: var(--apple-chic);
 }
 
+.third-sum .score{
+    background-color: var(--happy-balloon);
+}
+
 .lowest-sum {
-    background-color: pink !important;
+    background-color: var(--grandma-pillow);
+}
+
+.lowest-sum .score{
+    background-color: var(--cheery-pink);
 }
 
 .vcenter {
@@ -136,21 +159,42 @@ main {
     border: solid 3px white;
 }
 
+.rank,
 .score{
     text-align: center;
-    line-height: 50px;
+    margin-top: 10px;
+    line-height: 35px;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
     color: lightgray;
     background-color: var(--shadow-dirt);
     display: inline-block;
     border-radius: 50%;
-    min-width: 50px;
-    min-height:50px;
+    min-width: 35px;
+    min-height:35px;
 }
 
 .highest-of-column {
-    background-color: var(--cheery-pink);
-    border: dashed 3px var(--sugar-hearts);
-    color: var(--sugar-hearts) !important;
+    color: transparent;
+    background-color: transparent !important;
+    border-radius: 50%;
+    font-size: 20px;
+    background-image: url("../img/crown.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 35px 35px;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #000000aa;
+}
+
+[class*=hint--][aria-label]:after {
+    white-space: pre;
+    font-family: "Droid Sans Mono", monospace;
+}
+
+.parallax-container {
+    min-height: 577px;
+    background: transparent;
 }

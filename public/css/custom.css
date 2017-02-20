@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono');
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
 
 :root{
     --mighty-slate: #556270;
@@ -22,6 +23,10 @@ html, body {
     height: 100vh;
     margin: 0;
     font-family: 'Droid Sans Mono', monospace;
+}
+
+h1{
+    font-family: 'Russo One', sans-serif;
 }
 
 .bg-color .mighty-slate {
@@ -187,4 +192,9 @@ main {
 [class*=hint--][aria-label]:after {
     white-space: pre;
     font-family: "Droid Sans Mono", monospace;
+}
+
+.parallax-container {
+    min-height: 577px;
+    background: transparent;
 }

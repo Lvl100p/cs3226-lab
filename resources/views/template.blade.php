@@ -29,8 +29,6 @@
 
     <main class="col-md-offset-1 col-md-10 col-md-offset-1">
 
-        <h1>@yield('content-title')</h1>
-
         @yield('content')
 
     </main>

@@ -65,8 +65,16 @@ class StudentController extends Controller
             }
         });
 
+        // get top three students
+        $first_prizes = $students->where('sum', $highestSum)->values();
+        $second_prizes = $students->where('sum', $secondSum)->values();
+        $third_prizes = $students->where('sum', $thirdSum)->values();
+
         return view('index', [
-            'students' => $students
+            'students' => $students,
+            'first_prizes' => $first_prizes,
+            'second_prizes' => $second_prizes,
+            'third_prizes' => $third_prizes
         ]);
     }
 

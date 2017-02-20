@@ -13,5 +13,5 @@ elixir(function (mix) {
 
     mix.copy('resources/assets/css', 'public/css')
 
-    mix.copy('resources/assets/js/radarChart.js', 'public/js/radarChart.js');
+    mix.copy('resources/assets/js/', 'public/js/');
 });
