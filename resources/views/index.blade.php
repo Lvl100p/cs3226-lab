@@ -14,6 +14,7 @@
     {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
     {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
     {{ Html::script('js/parallax.min.js') }}
+    {{ Html::script('js/confetti.js') }}
     <script type="text/javascript">
         $('.parallax-container').parallax();
 
@@ -50,6 +51,10 @@
                 </a>
                 <strong><a href="/students/{{$third_prizes[0]->id}}"><span
                                 class="student-name">{{$third_prizes[0]->name}}</span></a></strong>
+            </div>
+
+            <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 150px; left: -150px;">
+                <canvas id="world" width="400" height="400"></canvas>
             </div>
             <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 300px">
                 <img src="./img/rank.png" alt="top-three"/>
@@ -101,7 +106,7 @@
                         <a class="hint--top hint--bounce hint--error"
                            aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
                            href="#">
-                            <img class="avatar" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/>
+                            <img class="avatar" src="https://api.adorable.io/avatars/50/1.png"/>
                         </a>
                         <strong><a href="/students/{{$student->id}}"><span
                                         class="student-name">{{$student->name}}</span></a></strong>
