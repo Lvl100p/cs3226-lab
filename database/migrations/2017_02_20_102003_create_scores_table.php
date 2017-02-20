@@ -15,11 +15,11 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->integer('student_id');
-            $table->string('scoretype');
+            $table->string('score_type');
             $table->integer('week');
             $table->decimal('score', 2, 1);
             $table->timestamps();
-            $table->primary(['student_id', 'scoretype', 'week']);
+            $table->primary(['student_id', 'score_type', 'week']);
         });
     }
 

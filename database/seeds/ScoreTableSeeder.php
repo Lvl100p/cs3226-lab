@@ -19,7 +19,7 @@ class ScoreTableSeeder extends Seeder
     				$scoreSeed = rand(0, 8);
     				DB::table('scores')->insert([
     					'student_id' => $studentid,
-    					'scoretype' => $scoretypes[$scoretype],
+    					'score_type' => $scoretypes[$scoretype],
     					'week' => $i,
     					'score' => $scores[$scoreSeed]
     					]);
