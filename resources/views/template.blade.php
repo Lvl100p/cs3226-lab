@@ -35,7 +35,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-offset-1 col-md-10 col-md-offset-1">
         <hr/>
         @include('includes.footer')
     </div>
