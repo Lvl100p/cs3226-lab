@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">You are trying to access a page that is not found. Please check your url.</div>
+                <div class="title">There was an error trying to reach this website, please check your URL.</div>
             </div>
         </div>
     </body>
