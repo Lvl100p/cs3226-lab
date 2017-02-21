@@ -239,8 +239,9 @@
 
 </section>
 
-<section id="delete">
+<section id="form">
     {!! Form::model($student, ['action' => ['StudentController@destroy', $student->id], 'method' => 'delete', 'id'=>'form-delete']) !!}
+    <a class="btn btn-warning" href="{{$student->id}}/edit">Edit</a>
     {!! Form::submit('Delete', ['class'=>'btn btn-danger', 'id'=>'btn-delete']) !!}
     {!! Form::close() !!}
 </section>

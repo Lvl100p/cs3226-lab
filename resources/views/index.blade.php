@@ -27,17 +27,16 @@
 @endsection
 
 @section('content')
-
+    
 	@if (Session::has('message'))
 		<div class="alert alert-info alert-dismissable fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 			{{ Session::get('message') }}
 		</div>
     @endif
-	
-	
 
-    <div class="parallax-container" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+    <div class="parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
@@ -120,7 +119,7 @@
                         <a class="hint--top hint--bounce hint--error"
                            aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
                            href="#">
-                            <img class="avatar" src="https://api.adorable.io/avatars/50/1.png"/>
+                            <img class="avatar visible-lg-inline-block" src="https://api.adorable.io/avatars/50/1.png"/>
                         </a>
                         <strong><a href="/students/{{$student->id}}"><span
                                         class="student-name">{{$student->name}}</span></a></strong>
