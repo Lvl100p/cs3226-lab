@@ -1,3 +1,5 @@
+IP address of web server is http://188.166.214.134
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
