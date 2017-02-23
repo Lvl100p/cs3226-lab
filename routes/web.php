@@ -19,13 +19,6 @@ Route::get('/help', function() {
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
 
-Route::get('/scores/edit', function() {
-	$scores = DB::table('scores')
-            ->join('students', 'scores.student_id', '=', 'students.id')
-            ->select('students.name', 'scores.score')
-            ->where('scores.score_type', '=', 'hw')
-            ->where('scores.week', '=', '1')
-            ->orderby('students.name', 'asc')
-            ->get();
-	return view('editScores', compact(['scores']));
-});
+Route::get('/scores/edit', 'ScoreController@editDefault');
+
+Route::post('/scores/edit', 'ScoreController@edit');
