@@ -16,9 +16,9 @@ class CreateAchievementTable extends Migration
     {
         Schema::create('achievements', function (Blueprint $table) {
             $table->increments('id');
-						$table->string('name');
-						$table->string('description');
-						$table->unsignedTinyInteger('max_tier'); // should be positive
+            $table->string('name');
+            $table->string('description');
+            $table->unsignedTinyInteger('max_tier'); // should be positive
             $table->timestamps();
         });
     }
