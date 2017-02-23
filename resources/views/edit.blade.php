@@ -52,12 +52,16 @@
             }
         });
     </script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 @endsection
 
 @section('content')
     @if (Session::has('message'))
-        <div class="alert alert-success">{{ Session::get('message') }}</div>
+        <div class="alert alert-success alert-dismissable fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+			{{ Session::get('message') }}
+		</div>
     @endif
 
     @if (count($errors) > 0)
