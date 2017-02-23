@@ -26,6 +26,8 @@
         return confirm("Are you sure you want to delete?");
     });
 </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -33,6 +35,13 @@
     <h1>{{$student->name}}
         <small>in CS3233 S2 AY 2016/17</small>
     </h1>
+	
+	@if (Session::has('message'))
+		<div class="alert alert-success alert-dismissable fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+			{{ Session::get('message') }}
+		</div>
+    @endif
 
     <div class="container-fluid">
         <div class="row">

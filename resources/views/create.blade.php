@@ -67,6 +67,11 @@
             </ul>
         </div>
     @endif
+   
+
+
+
+
 
     {!! Form::open(['url' => 'students', 'files' => 'true']) !!}
     <div class="row">
