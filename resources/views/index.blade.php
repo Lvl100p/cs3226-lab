@@ -23,7 +23,6 @@
         });
         $('#ranktable_filter input').attr("placeholder", "Search here!")
     </script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
 
 @section('content')
@@ -119,7 +118,7 @@
                         <a class="hint--top hint--bounce hint--error"
                            aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
                            href="#">
-                            <img class="avatar visible-lg-inline-block" src="https://api.adorable.io/avatars/50/1.png"/>
+                            <img class="avatar visible-lg-inline-block" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/>
                         </a>
                         <strong><a href="/students/{{$student->id}}"><span
                                         class="student-name">{{$student->name}}</span></a></strong>

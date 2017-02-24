@@ -21,24 +21,31 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Account Action <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="students/create">Create Student Account</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li>
-                            <form method="POST" action="{{ url('/logout') }}">
-                                {{ csrf_field() }}
-                                <div class="form-group">
-                                    <div class="col-md-offset-7 col-md-5">
-                                        <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Hello, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}!</strong> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="students/create">Create Student Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <form method="POST" action="{{ url('/logout') }}">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <div class="col-md-offset-7 col-md-5">
+                                            <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->

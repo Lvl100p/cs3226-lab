@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Student;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -62,6 +63,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        Session::flash('message', "Student " . $data['name'] . " created.");
+
         return Student::create([
             'rank' => 0,
             'nickname' => $data['nickname'],
