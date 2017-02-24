@@ -53,3 +53,7 @@ Route::post('/achievements', function(Request $request) {
 
     return view('achievements', ['students' => $students, 'defaultAchv' => $requestedAchvId, 'defaultTier' => $requestedTier]);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
