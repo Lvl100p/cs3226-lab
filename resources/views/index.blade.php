@@ -27,7 +27,7 @@
 @endsection
 
 @section('content')
-    
+
 	@if (Session::has('message'))
 		<div class="alert alert-info alert-dismissable fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>

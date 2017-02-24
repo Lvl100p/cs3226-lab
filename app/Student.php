@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
     protected $fillable = [
         'rank',
@@ -19,6 +20,13 @@ class Student extends Model
         'ks',
         'ac',
         'dil',
-        'sum'
+        'sum',
+        'email',
+        'password'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token'
     ];
 }
