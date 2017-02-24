@@ -27,6 +27,10 @@
 
 @section('content')
 
+    @if (session('status'))
+        <p class="alert alert-success alert-dismissable">{{ session('status') }}</p>
+    @endif
+
 	@if (Session::has('message'))
 		<div class="alert alert-info alert-dismissable fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
