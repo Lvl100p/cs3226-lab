@@ -22,3 +22,4 @@ Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'c
 Route::get('/scores/edit', 'ScoreController@editDefault');
 
 Route::post('/scores/edit', 'ScoreController@edit');
+Route::put('/scores/edit', 'ScoreController@update');
