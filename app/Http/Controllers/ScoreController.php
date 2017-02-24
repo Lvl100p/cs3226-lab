@@ -10,37 +10,12 @@ use App\Score;
 class ScoreController extends Controller
 {
 	public function editDefault() {
-
-		$scores = DB::table('scores')
-		->join('students', 'scores.student_id', '=', 'students.id')
-		->select('scores.score', 'students.name', 'students.id')
-		->where('scores.score_type', '=', 'hw')
-		->where('scores.week', '=', '1')
-		->orderby('students.name', 'asc')
-		->get();
-		if(count($scores)==0) {
-			$scores = DB::table('students')
-			->select('name', 'id')
-			->orderby('name', 'asc')
-			->get();
-		}
+		$scores = $this->getScores('hw', 1);
 		return view('editScores', compact(['scores']));
 	}
 
 	public function edit(Request $request) {
-		$scores = DB::table('scores')
-		->join('students', 'scores.student_id', '=', 'students.id')
-		->select('students.name', 'scores.score', 'students.id')
-		->where('scores.score_type', '=', $request->type)
-		->where('scores.week', '=', $request->week)
-		->orderby('students.name', 'asc')
-		->get();
-		if(count($scores)==0) {
-			$scores = DB::table('students')
-			->select('students.name', 'students.id')
-			->orderby('name', 'asc')
-			->get();
-		}
+		$scores = $this->getScores($request->type, $request->week);
 		return view('editScores', compact(['scores', 'request']));
 	}
 
@@ -64,6 +39,27 @@ class ScoreController extends Controller
 			}
 			$score->save();
 		}
+
+		$scores = $this->getScores($type, $week);
+
 		return redirect('scores/edit')->withInput($request->only(['week','type']));
+	}
+
+	private function getScores($type, $week) {
+		$scores = DB::table('scores')
+		->join('students', 'scores.student_id', '=', 'students.id')
+		->select('students.name', 'scores.score', 'students.id')
+		->where('scores.score_type', '=', $type)
+		->where('scores.week', '=', $week)
+		->orderby('students.name', 'asc')
+		->get();
+		
+		if(count($scores)==0) {
+			$scores = DB::table('students')
+			->select('students.name', 'students.id')
+			->orderby('name', 'asc')
+			->get();
+		}
+		return $scores;
 	}
 }
