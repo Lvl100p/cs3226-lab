@@ -214,3 +214,8 @@ main {
 #ranktable_filter input::-moz-placeholder {  /* Firefox 19+ */
     color: lightgray;
 }
+
+#chart {
+    height:700px;
+    width:100%;
+}

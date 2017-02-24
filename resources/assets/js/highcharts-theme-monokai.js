@@ -10,9 +10,9 @@
 'use strict';
 
 Highcharts.theme = {
-    "colors": ["#F92672", "#66D9EF", "#A6E22E", "#A6E22E"],
+    "colors": ["#F92672", "#66D9EF", "#A6E22E", "#E97f02", '#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
     "chart": {
-        "backgroundColor": "transparent",
+        "backgroundColor": "#272B30",
         "style": {
             "fontFamily": "Droid Sans Mono",
             "color": "#A2A39C"

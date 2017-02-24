@@ -7,13 +7,16 @@
 @section('stylesheet')
     {{ Html::style('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css')}}
     {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css') }}
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css') }}
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css') }}
     {{ Html::style('css/flags.css')}}
 @endsection
 
 @section('script')
     {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
     {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
-    {{ Html::script('http://code.highcharts.com/highcharts.js') }}
+    {{ Html::script('https://code.highcharts.com/stock/highstock.js') }}
+    {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js') }}
     {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
@@ -27,51 +30,122 @@
         });
         $('#ranktable_filter input').attr("placeholder", "Search here!")
 
-        Highcharts.chart('chart', {
+        var seriesOptions = [],
+                seriesCounter = 0,
+                names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
-            title: {
-                text: 'Solar Employment Growth by Sector, 2010-2016'
-            },
+        /**
+         * Create the chart when all data is loaded
+         * @returns {undefined}
+         */
+        function createChart() {
 
-            subtitle: {
-                text: 'Source: thesolarfoundation.com'
-            },
+            var chart = Highcharts.stockChart('chart', {
 
-            yAxis: {
-                title: {
-                    text: 'Number of Employees'
+                rangeSelector: {
+                    selected: 4
+                },
+
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            return (this.value > 0 ? ' + ' : '') + this.value;
+                        }
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: 'silver'
+                    }]
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45
+                    }
+                },
+
+                plotOptions: {
+                    series: {
+                        compare: 'undefined',
+                        showInNavigator: true
+                    }
+                },
+
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    valueDecimals: 1,
+                    split: true
+                },
+
+                series: seriesOptions
+            });
+
+            return chart;
+        }
+
+        function createChartOptions(chart) {
+            $.each(chart.series, function (i, serie) {
+                if (serie.name.indexOf('Navigator')) {
+                    $('#chart-options').append('<option value="' + i + '">' + serie.name + '</option>')
                 }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
+            });
 
-            plotOptions: {
-                series: {
-                    pointStart: 2010
-                }
-            },
+            $('#chart-options').select2();
 
-            series: [{
-                name: 'Installation',
-                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-            }, {
-                name: 'Manufacturing',
-                data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-            }, {
-                name: 'Sales & Distribution',
-                data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-            }, {
-                name: 'Project Development',
-                data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-            }, {
-                name: 'Other',
-                data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-            }]
+            $('select').on('change', function (evt) {
+                var selectedSeries = $('#chart-options').select2('val');
 
+                $.each(chart.series, function (i, name) {
+
+                    if (jQuery.inArray(i.toString(), selectedSeries) !== -1) {
+                        // is selected
+                        chart.series[i].show();
+                    } else {
+                        chart.series[i].hide();
+                    }
+                });
+            });
+
+        }
+
+        function formatSelectionCssClass(tag, container) {
+            $(container).parent().css({"background-color": "#ff0000"});
+        }
+
+        $.each(names, function (i, name) {
+
+            seriesOptions[i] = {
+                name: name,
+                data: [
+                    [1485907200000, getRandomInt(0, 100)], // wk1
+                    [1485993600000, getRandomInt(0, 100)], // wk2
+                    [1486080000000, getRandomInt(0, 100)], // wk3
+                    [1486339200000, getRandomInt(0, 100)], // wk4
+                    [1486425600000, getRandomInt(0, 100)], // wk5
+                    [1486512000000, getRandomInt(0, 100)], // wk6
+                    [1486598400000, getRandomInt(0, 100)], // wk7
+                    [1486684800000, getRandomInt(0, 100)], // wk8
+                    [1486944000000, getRandomInt(0, 100)], // wk9
+                    [1487030400000, getRandomInt(0, 100)], // wk10
+                    [1487116800000, getRandomInt(0, 100)], // wk11
+                    [1487203200000, getRandomInt(0, 100)], // wk12
+                    [1487289600000, getRandomInt(0, 100)] // wk13
+                ]
+            };
+
+            // As we're loading the data asynchronously, we don't know what order it will arrive. So
+            // we keep a counter and create the chart when all the data is loaded.
+            seriesCounter += 1;
+
+            if (seriesCounter === names.length) {
+                var chart = createChart();
+                createChartOptions(chart);
+            }
         });
+
+        function getRandomInt(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
     </script>
 @endsection
 
@@ -213,7 +287,8 @@
         </table>
     </section>
 
-    <div class="chart-parallax-container" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+    <div class="chart-parallax-container" data-parallax="scroll" data-position="top" data-bleed="550"
+         data-natural-width="600"
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 150px; left: -150px;">
@@ -222,7 +297,10 @@
         </div>
     </div>
 
-    <section>
-        <div id="chart"></div>
+    <section class="row">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+            <select id="chart-options" multiple="multiple" style="width:100%"></select>
+        </div>
+        <div id="chart" class="col-md-12"></div>
     </section>
 @endsection
