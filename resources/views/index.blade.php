@@ -7,21 +7,134 @@
 @section('stylesheet')
     {{ Html::style('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css')}}
     {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.4.1/hint.min.css') }}
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css') }}
+    {{ Html::style('https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.6/select2-bootstrap.min.css') }}
     {{ Html::style('css/flags.css')}}
 @endsection
 
 @section('script')
     {{ Html::script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js') }}
     {{ Html::script('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js') }}
+    {{ Html::script('https://code.highcharts.com/stock/highstock.js') }}
+    {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js') }}
+    {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
     <script type="text/javascript">
-        $('.parallax-container').parallax();
+        $('.intro-parallax-container').parallax();
+        $('.chart-parallax-container').parallax();
+
         $('#ranktable').DataTable({
             "dom": "fartp",
-            "order": [[ 12, "desc" ]]
+            "order": [[12, "desc"]]
         });
         $('#ranktable_filter input').attr("placeholder", "Search here!")
+
+        var seriesOptions = [],
+                seriesCounter = 0,
+                names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+
+        var chart = createChart();
+        createChartOptions(chart);
+
+        function createChart() {
+
+            // generate dummy data
+            $.each(names, function (i, name) {
+
+                seriesOptions[i] = {
+                    name: name,
+                    data: [
+                        [1485907200000, getRandomInt(0, 100)], // wk1
+                        [1485993600000, getRandomInt(0, 100)], // wk2
+                        [1486080000000, getRandomInt(0, 100)], // wk3
+                        [1486339200000, getRandomInt(0, 100)], // wk4
+                        [1486425600000, getRandomInt(0, 100)], // wk5
+                        [1486512000000, getRandomInt(0, 100)], // wk6
+                        [1486598400000, getRandomInt(0, 100)], // wk7
+                        [1486684800000, getRandomInt(0, 100)], // wk8
+                        [1486944000000, getRandomInt(0, 100)], // wk9
+                        [1487030400000, getRandomInt(0, 100)], // wk10
+                        [1487116800000, getRandomInt(0, 100)], // wk11
+                        [1487203200000, getRandomInt(0, 100)], // wk12
+                        [1487289600000, getRandomInt(0, 100)] // wk13
+                    ]
+                };
+            });
+
+            var chart = Highcharts.stockChart('chart', {
+
+                rangeSelector: {
+                    selected: 4
+                },
+
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            return (this.value > 0 ? ' + ' : '') + this.value;
+                        }
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: 'silver'
+                    }]
+                },
+                xAxis: {
+                    labels: {
+                        rotation: -45
+                    }
+                },
+
+                plotOptions: {
+                    series: {
+                        compare: 'undefined',
+                        showInNavigator: true
+                    }
+                },
+
+                tooltip: {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    valueDecimals: 1,
+                    split: true
+                },
+
+                series: seriesOptions
+            });
+
+            return chart;
+        }
+
+        function createChartOptions(chart) {
+            $.each(chart.series, function (i, serie) {
+                if (serie.name.indexOf('Navigator')) {
+                    $('#chart-options').append('<option value="' + i + '">' + serie.name + '</option>')
+                }
+            });
+
+            $('#chart-options').select2({
+
+            });
+
+            $('select').on('change', function (evt) {
+                var selectedSeries = $('#chart-options').select2('val');
+
+                $.each(chart.series, function (i, name) {
+
+                    if (jQuery.inArray(i.toString(), selectedSeries) !== -1 || !chart.series[i].name.indexOf("Navigator")) {
+                        // is selected
+                        chart.series[i].show();
+                    } else {
+                        chart.series[i].hide();
+                    }
+                });
+            });
+
+        }
+
+        function getRandomInt(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
     </script>
 @endsection
 
@@ -37,9 +150,7 @@
 			{{ Session::get('message') }}
 		</div>
     @endif
-
-    <div class="parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
-
+    <div class="intro-parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
@@ -79,13 +190,17 @@
                 <img src="./img/intro.png" alt="top-three"/>
             </div>
 
-            <div class="intro col-md-4" style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
+            <div class="intro col-md-4"
+                 style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
                 <h1>CS3233 Competitive Programming Rank List</h1>
-                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited high school students who want
+
+                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited
+                    high school students who want
                     to compete in IOI (not just for NOI), and NUS students in general who aspire to excel in technical
                     interviews of top IT companies.</p>
 
-                <p style="text-align: justify;">It covers techniques for attacking and solving challenging* computational problems. Fundamental
+                <p style="text-align: justify;">It covers techniques for attacking and solving challenging*
+                    computational problems. Fundamental
                     algorithmic solving techniques covered include complete search, divide/reduce/transform and conquer,
                     greedy, dynamic programming, etc. Domain specific techniques like graph, mathematics-related, string
                     processing, and computational geometry will also be covered.</p>
@@ -159,5 +274,22 @@
             @endforeach
             </tbody>
         </table>
+    </section>
+
+    <div class="chart-parallax-container" data-parallax="scroll" data-position="top" data-bleed="550"
+         data-natural-width="600"
+         data-natural-height="577">
+        <div class="parallax-slider">
+            <div class="col-md-offset-6 col-md-6" style="position: absolute; top: 150px; left: -150px;">
+                <img src="img/chart.png"/>
+            </div>
+        </div>
+    </div>
+
+    <section class="row">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+            <select id="chart-options" multiple="multiple" data-placeholder="Filter your result by typing the name of the student..." style="width:100%"></select>
+        </div>
+        <div id="chart" class="col-md-12"></div>
     </section>
 @endsection
