@@ -18,6 +18,7 @@ $maxPossibleTier = App\Achievement::max('max_tier');
 
 echo Form::open() . "\n";
 
+// Drop down list of achievements
 echo Form::label('achievement', 'Achievement') . "\n";
 echo '<select name="achievement">' . "\n";
 foreach ($achievements as $achievement) {
@@ -29,6 +30,7 @@ foreach ($achievements as $achievement) {
 }
 echo '</select>' . "\n";
 
+// Drop down list of tiers
 echo Form::label('tier', 'Tier') . "\n";
 echo '<select name="tier">' . "\n";
 for ($i = 1; $i <= $maxPossibleTier; $i++) {
