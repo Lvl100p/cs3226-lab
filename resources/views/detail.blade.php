@@ -11,7 +11,6 @@
 @section('script')
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/js/datatables.js"></script>
-<script type="text/javascript" src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="{{ url(asset('js/radarChart.js')) }}"></script>
 
@@ -27,6 +26,8 @@
         return confirm("Are you sure you want to delete?");
     });
 </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -34,6 +35,13 @@
     <h1>{{$student->name}}
         <small>in CS3233 S2 AY 2016/17</small>
     </h1>
+	
+	@if (Session::has('message'))
+		<div class="alert alert-success alert-dismissable fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+			{{ Session::get('message') }}
+		</div>
+    @endif
 
     <div class="container-fluid">
         <div class="row">

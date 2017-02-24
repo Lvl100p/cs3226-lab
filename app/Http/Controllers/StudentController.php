@@ -6,6 +6,7 @@ use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class StudentController extends Controller
 {
@@ -65,8 +66,16 @@ class StudentController extends Controller
             }
         });
 
+        // get top three students
+        $first_prizes = $students->where('sum', $highestSum)->values();
+        $second_prizes = $students->where('sum', $secondSum)->values();
+        $third_prizes = $students->where('sum', $thirdSum)->values();
+
         return view('index', [
-            'students' => $students
+            'students' => $students,
+            'first_prizes' => $first_prizes,
+            'second_prizes' => $second_prizes,
+            'third_prizes' => $third_prizes
         ]);
     }
 
@@ -111,19 +120,17 @@ class StudentController extends Controller
         $student->sum = 0;
 
         $student->save();
-
+/*
         $ifp = fopen('img/uploads/' . $student->id . '.png', "wb");
 
         $data = explode(',', $request->cropped_image);
 
         fwrite($ifp, base64_decode($data[1]));
         fclose($ifp);
-
+*/
         Session::flash('message', "Student " . $student->name . " created.");
 
-        return view('detail', [
-            'student' => $student
-        ]);
+        return Redirect::to('students/' . $student->id);
 
     }
 
@@ -154,14 +161,16 @@ class StudentController extends Controller
 
         Session::flash('message', "Student " . $student->name . " updated.");
 
-        return view('edit', [
-            'student' => $student
-        ]);
+        return Redirect::to('students/' . $id . '/edit');
+		
     }
 
     public function destroy($id){
+		$student = Student::find($id);
+		Session::flash('message', "Student " . $student->name . " deleted.");
+		
         Student::destroy($id);
 
-        return view('help');
+        return Redirect::to('/');
     }
 }
