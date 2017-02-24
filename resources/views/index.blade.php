@@ -112,14 +112,16 @@
                 }
             });
 
-            $('#chart-options').select2();
+            $('#chart-options').select2({
+
+            });
 
             $('select').on('change', function (evt) {
                 var selectedSeries = $('#chart-options').select2('val');
 
                 $.each(chart.series, function (i, name) {
 
-                    if (jQuery.inArray(i.toString(), selectedSeries) !== -1) {
+                    if (jQuery.inArray(i.toString(), selectedSeries) !== -1 || !chart.series[i].name.indexOf("Navigator")) {
                         // is selected
                         chart.series[i].show();
                     } else {
@@ -148,7 +150,7 @@
 			{{ Session::get('message') }}
 		</div>
     @endif
-    <div class="parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+    <div class="intro-parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
@@ -286,7 +288,7 @@
 
     <section class="row">
         <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-            <select id="chart-options" multiple="multiple" style="width:100%"></select>
+            <select id="chart-options" multiple="multiple" data-placeholder="Filter your result by typing the name of the student..." style="width:100%"></select>
         </div>
         <div id="chart" class="col-md-12"></div>
     </section>
