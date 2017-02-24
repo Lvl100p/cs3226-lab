@@ -21,6 +21,10 @@ Route::get('/help', function() {
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
 
+Route::get('/scores/edit', 'ScoreController@editDefault');
+Route::post('/scores/edit', 'ScoreController@edit');
+Route::put('/scores/edit', 'ScoreController@update');
+
 Route::get('/achievements', function() {
     return view('achievements');
 });
@@ -49,5 +53,3 @@ Route::post('/achievements', function(Request $request) {
 
     return view('achievements', ['students' => $students, 'defaultAchv' => $requestedAchvId, 'defaultTier' => $requestedTier]);
 });
-
-
