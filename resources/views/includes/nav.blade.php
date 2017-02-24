@@ -17,6 +17,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('/help') }}">Help</a></li>
+                <li><a href="{{ url('/achievements') }}">Achievements</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
