@@ -34,11 +34,33 @@
                 seriesCounter = 0,
                 names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
-        /**
-         * Create the chart when all data is loaded
-         * @returns {undefined}
-         */
+        var chart = createChart();
+        createChartOptions(chart);
+
         function createChart() {
+
+            // generate dummy data
+            $.each(names, function (i, name) {
+
+                seriesOptions[i] = {
+                    name: name,
+                    data: [
+                        [1485907200000, getRandomInt(0, 100)], // wk1
+                        [1485993600000, getRandomInt(0, 100)], // wk2
+                        [1486080000000, getRandomInt(0, 100)], // wk3
+                        [1486339200000, getRandomInt(0, 100)], // wk4
+                        [1486425600000, getRandomInt(0, 100)], // wk5
+                        [1486512000000, getRandomInt(0, 100)], // wk6
+                        [1486598400000, getRandomInt(0, 100)], // wk7
+                        [1486684800000, getRandomInt(0, 100)], // wk8
+                        [1486944000000, getRandomInt(0, 100)], // wk9
+                        [1487030400000, getRandomInt(0, 100)], // wk10
+                        [1487116800000, getRandomInt(0, 100)], // wk11
+                        [1487203200000, getRandomInt(0, 100)], // wk12
+                        [1487289600000, getRandomInt(0, 100)] // wk13
+                    ]
+                };
+            });
 
             var chart = Highcharts.stockChart('chart', {
 
@@ -107,41 +129,6 @@
             });
 
         }
-
-        function formatSelectionCssClass(tag, container) {
-            $(container).parent().css({"background-color": "#ff0000"});
-        }
-
-        $.each(names, function (i, name) {
-
-            seriesOptions[i] = {
-                name: name,
-                data: [
-                    [1485907200000, getRandomInt(0, 100)], // wk1
-                    [1485993600000, getRandomInt(0, 100)], // wk2
-                    [1486080000000, getRandomInt(0, 100)], // wk3
-                    [1486339200000, getRandomInt(0, 100)], // wk4
-                    [1486425600000, getRandomInt(0, 100)], // wk5
-                    [1486512000000, getRandomInt(0, 100)], // wk6
-                    [1486598400000, getRandomInt(0, 100)], // wk7
-                    [1486684800000, getRandomInt(0, 100)], // wk8
-                    [1486944000000, getRandomInt(0, 100)], // wk9
-                    [1487030400000, getRandomInt(0, 100)], // wk10
-                    [1487116800000, getRandomInt(0, 100)], // wk11
-                    [1487203200000, getRandomInt(0, 100)], // wk12
-                    [1487289600000, getRandomInt(0, 100)] // wk13
-                ]
-            };
-
-            // As we're loading the data asynchronously, we don't know what order it will arrive. So
-            // we keep a counter and create the chart when all the data is loaded.
-            seriesCounter += 1;
-
-            if (seriesCounter === names.length) {
-                var chart = createChart();
-                createChartOptions(chart);
-            }
-        });
 
         function getRandomInt(min, max) {
             return Math.round(Math.random() * (max - min) + min);
