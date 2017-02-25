@@ -16,7 +16,7 @@ class EarnedTableSeeder extends Seeder
         $totalAchv = DB::table('achievements')->count();
         $totalStud = DB::table('students')->count();
 
-        // For each student, assign him a random number of achievements
+        // For each student, assign him a random number of unique achievements
         for ($i = 1; $i <= $totalStud; $i++) {
             $numAchvToHave = rand(0, $totalAchv);
             $achvIds = array();

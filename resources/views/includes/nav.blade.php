@@ -18,6 +18,7 @@
             <ul class="nav navbar-nav">
                 <li class="{{ \Illuminate\Support\Facades\Request::is('/') ? 'active' : null }}"><a href="{{ url('/') }}">Home</a></li>
                 <li class="{{ \Illuminate\Support\Facades\Request::is('help') ? 'active' : null }}"><a href="{{ url('/help') }}">Help</a></li>
+                <li class="{{ \Illuminate\Support\Facades\Request::is('achievements') ? 'active' : null }}"><a href="{{ url('/achievements') }}">Achievements</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
