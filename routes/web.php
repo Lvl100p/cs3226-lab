@@ -19,8 +19,13 @@ Route::get('/help', function() {
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
 
-Route::get('/achievements', 'AchievementController@index');
+Route::get('/scores/edit', 'ScoreController@editDefault');
+Route::post('/scores/edit', 'ScoreController@edit');
+Route::put('/scores/edit', 'ScoreController@update');
 
+Route::get('/achievements', 'AchievementController@index');
 Route::post('/achievements', 'AchievementController@getStudents');
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index');

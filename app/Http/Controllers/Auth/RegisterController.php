@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Student;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -62,7 +63,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        Session::flash('message', "Student " . $data['name'] . " created.");
+
+        return Student::create([
+            'rank' => 0,
+            'nickname' => $data['nickname'],
+            'flag' => $data['flag'],
+            'mc' => 0,
+            'tc' => 0,
+            'spe'  => 0,
+            'hw' => 0,
+            'bs'  => 0,
+            'ks' => 0,
+            'ac'  => 0,
+            'dil'  => 0,
+            'sum' => 0,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
