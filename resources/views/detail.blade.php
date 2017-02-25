@@ -28,6 +28,7 @@
 </script>
 @endsection
 
+
 @section('content')
 <section id="summary">
     <h1>{{$student->name}}
@@ -227,7 +228,23 @@
         <h4>Late with HW1 once!</h4>
         Tsk Tsk
     </div>
-
+	
+	<div>
+	<i>
+	Created on
+	<?php use Carbon\Carbon; ?>
+	<?php setlocale(LC_TIME, 'English');
+	echo $student->created_at->formatLocalized('%A %d %B %Y'); ?>
+	</i>
+	</div>
+	
+	<div>
+	<i>
+	Last updated
+	<?php 
+	echo $student->updated_at->diffForHumans();?>
+	</i>
+	</div>
 </section>
 
 <section id="delete">

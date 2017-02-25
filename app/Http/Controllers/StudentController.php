@@ -6,6 +6,7 @@ use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -77,6 +78,15 @@ class StudentController extends Controller
             'third_prizes' => $third_prizes
         ]);
     }
+	
+	//public function lastupdated($id)
+	//{
+		//$student = Student::find($id);
+		//$dateupdate = Carbon::$student->update
+		//$lastupdate =  Carbon::now()->subDays(5)->diffForHumans();
+		
+	//}
+	
 
     public function show($id)
     {
