@@ -31,4 +31,8 @@ class Student extends Authenticatable
         'password',
         'remember_token'
     ];
+
+    public function scores(){
+        return $this->hasMany('App\Score');
+    }
 }
