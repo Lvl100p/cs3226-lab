@@ -43,7 +43,7 @@ for ($i = 1; $i <= $maxPossibleTier; $i++) {
 echo '</select>' . "\n";
 echo Form::submit('Get students') . "\n";
 
-echo Form::close() . "\n";
+echo Form::close() . "<br><br>\n";
 
 // Display the students with the specified achievement and tier
 if (isset($students)) {
