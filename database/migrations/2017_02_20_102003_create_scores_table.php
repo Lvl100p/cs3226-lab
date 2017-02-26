@@ -16,9 +16,13 @@ class CreateScoresTable extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
-            $table->string('score_type');
+            $table->decimal('mc', 2, 1);
+            $table->decimal('tc', 2, 1);;
+            $table->decimal('hw', 2, 1);;
+            $table->decimal('bs', 2, 1);
+            $table->decimal('ks', 2, 1);
+            $table->decimal('ac', 2, 1);
             $table->integer('week');
-            $table->decimal('score', 2, 1);
             $table->timestamps();
         });
     }

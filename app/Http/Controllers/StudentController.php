@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Score;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'getWeeklySums']]);
     }
 
     public function index()
@@ -76,11 +77,17 @@ class StudentController extends Controller
         $second_prizes = $students->where('sum', $secondSum)->values();
         $third_prizes = $students->where('sum', $thirdSum)->values();
 
+        $student_names = Student::all()
+            ->transform(function($student){
+                return $student->name;
+            });
+
         return view('index', [
             'students' => $students,
             'first_prizes' => $first_prizes,
             'second_prizes' => $second_prizes,
-            'third_prizes' => $third_prizes
+            'third_prizes' => $third_prizes,
+            'student_names' => $student_names
         ]);
     }
 
@@ -125,28 +132,30 @@ class StudentController extends Controller
         $student->sum = 0;
 
         $student->save();
-/*
-        $ifp = fopen('img/uploads/' . $student->id . '.png', "wb");
+        /*
+                $ifp = fopen('img/uploads/' . $student->id . '.png', "wb");
 
-        $data = explode(',', $request->cropped_image);
+                $data = explode(',', $request->cropped_image);
 
-        fwrite($ifp, base64_decode($data[1]));
-        fclose($ifp);
-*/
+                fwrite($ifp, base64_decode($data[1]));
+                fclose($ifp);
+        */
         Session::flash('message', "Student " . $student->name . " created.");
 
         return Redirect::to('students/' . $student->id);
 
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $student = Student::find($id);
         return view('edit', [
             'student' => $student
         ]);
     }
 
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         $student = Student::find($id);
         $student->rank = 0;
         $student->name = $request->name;
@@ -159,23 +168,53 @@ class StudentController extends Controller
         $student->bs = $request->bs;
         $student->ks = $request->ks;
         $student->ac = $request->ac;
-        $student->dil = $request->hw+$request->bs+$request->ks+$request->ac;
-        $student->sum = $student->spe+$student->dil;
+        $student->dil = $request->hw + $request->bs + $request->ks + $request->ac;
+        $student->sum = $student->spe + $student->dil;
 
         $student->save();
 
         Session::flash('message', "Student " . $student->name . " updated.");
 
         return Redirect::to('students/' . $id . '/edit');
-		
+
     }
 
-    public function destroy($id){
-		$student = Student::find($id);
-		Session::flash('message', "Student " . $student->name . " deleted.");
-		
+    public function destroy($id)
+    {
+        $student = Student::find($id);
+        Session::flash('message', "Student " . $student->name . " deleted.");
+
         Student::destroy($id);
 
         return Redirect::to('/');
+    }
+
+    public function getScores($id)
+    {
+        $scores = Student::find($id)->scores;
+
+        return $scores;
+    }
+
+    public function getWeeklySums($id)
+    {
+        // execute DB query to get all weekly entries for this student_id
+        $scores = Score::where('student_id', $id)
+            ->get();
+
+        $student = Student::find($id);
+
+        // transform the returning result by summing all score components
+        $weeklySums = $scores->transform(function ($score) {
+            $sum = $score->mc + $score->tc + $score->hw + $score->bs + $score->ks + $score->ac;
+
+            return [
+                $score->week,
+                $sum
+            ];
+        });
+
+        return collect($weeklySums)->toJson();
+
     }
 }
