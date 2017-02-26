@@ -21,7 +21,7 @@
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
     {{ Html::script('js/table-sorting.js') }}
-    
+
     <script type="text/javascript">
         $('.intro-parallax-container').parallax();
         $('.chart-parallax-container').parallax();
@@ -35,19 +35,19 @@
 
         var studentCount = 10;
         var seriesOptions = [];
-        var seriesCounter=0;
+        var seriesCounter = 0;
 
 
         var studentNames = [
-                @foreach($student_names as $student_name)
-                "{{$student_name}}",
-                @endforeach
-        ];
+            @foreach($student_names as $student_name)
+            "{{$student_name}}",
+            @endforeach
+    ];
 
 
-        $.each([1,2,3,4,5,6,7,8,9,10], function(i){
+        $.each([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function (i) {
 
-            $.getJSON('http://127.0.0.1:8000/students/' + i + '/weeklySums',    function (data) {
+            $.getJSON('http://127.0.0.1:8000/students/' + i + '/weeklySums', function (data) {
 
                 seriesOptions[i] = {
                     name: studentNames[i],
@@ -201,6 +201,11 @@
             <div class="intro col-md-4"
                  style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
                 <h1>CS3233 Competitive Programming Rank List</h1>
+
+                <p><i>Last updated
+                        <?php use Carbon\Carbon;
+                        echo Carbon::createFromFormat('Y-m-d H:i:s', DB::table('students')->max('updated_at'))->diffForHumans();?>
+                    </i></p>
 
                 <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited
                     high school students who want
