@@ -19,7 +19,7 @@
         jQuery(document).ready(function () {
             jQuery('#ranktable').DataTable();
 
-            radarChart({{$student->mc}}, {{$student->tc}}, {{$student->hw}}, {{$student->bs}}, {{$student->ks}}, {{$student->ac}});
+            radarChart({{$scores['mc']['sum']}}, {{$scores['tc']['sum']}}, {{$scores['hw']['sum']}}, {{$scores['bs']['sum']}}, {{$scores['ks']['sum']}}, {{$scores['ac']['sum']}});
 
         });
 
@@ -59,16 +59,16 @@
                         </tr>
                         <tr>
                             <td>SPE(ed) component</td>
-                            <td>{{$student->mc}} + {{$student->tc}} = {{$student->spe}}</td>
+                            <td>{{  $scores['mc']['sum']  }} + {{  $scores['tc']['sum']  }} = {{  $scores['mc']['sum'] +  $scores['tc']['sum'] }}</td>
                         </tr>
                         <tr>
                             <td>DIL(igence) component</td>
-                            <td>{{$student->hw}} + {{$student->bs}} + {{$student->ks}} + {{$student->ac}}
-                                = {{$student->dil}}</td>
+                            <td>{{  $scores['hw']['sum']  }} + {{$scores['bs']['sum']}} + {{$scores['ks']['sum']}} + {{$scores['ac']['sum']}}
+                                = {{$scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']}}</td>
                         </tr>
                         <tr>
                             <td>Sum</td>
-                            <td>SPE + DIL = {{$student->spe}} + {{$student->dil}} = {{$student->sum}}</td>
+                            <td>SPE + DIL = {{  $scores['mc']['sum'] +  $scores['tc']['sum']  }} + {{  $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }} = {{$scores['mc']['sum'] +  $scores['tc']['sum'] + $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }}</td>
                         </tr>
                     </table>
                 </div>
@@ -102,99 +102,99 @@
             <tbody>
             <tr>
                 <td>Mini Contests</td>
-                <td>4</td>
-                <td>4.0</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{  $scores['mc']['sum']  }}</td>
+                <td>{{  $scores['mc'][1]  }}</td>
+                <td>{{  $scores['mc'][2]  }}</td>
+                <td>{{  $scores['mc'][3]  }}</td>
+                <td>{{  $scores['mc'][4]  }}</td>
+                <td>{{  $scores['mc'][5]  }}</td>
+                <td>{{  $scores['mc'][6]  }}</td>
+                <td>{{  $scores['mc'][7]  }}</td>
+                <td>{{  $scores['mc'][8]  }}</td>
+                <td>{{  $scores['mc'][9]  }}</td>
+                <td>{{  $scores['mc'][10]  }}</td>
+                <td>{{  $scores['mc'][11]  }}</td>
+                <td>{{  $scores['mc'][12]  }}</td>
             </tr>
             <tr>
                 <td>Team Contests</td>
-                <td>0</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{  $scores['tc']['sum']  }}</td>
+                <td>{{  $scores['tc'][1]  }}</td>
+                <td>{{  $scores['tc'][2]  }}</td>
+                <td>{{  $scores['tc'][3]  }}</td>
+                <td>{{  $scores['tc'][4]  }}</td>
+                <td>{{  $scores['tc'][5]  }}</td>
+                <td>{{  $scores['tc'][6]  }}</td>
+                <td>{{  $scores['tc'][7]  }}</td>
+                <td>{{  $scores['tc'][8]  }}</td>
+                <td>{{  $scores['tc'][9]  }}</td>
+                <td>{{  $scores['tc'][10]  }}</td>
+                <td>{{  $scores['tc'][11]  }}</td>
+                <td>{{  $scores['tc'][12]  }}</td>
             </tr>
             <tr>
                 <td>Homework</td>
-                <td>1</td>
-                <td>1.0</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{  $scores['hw']['sum']  }}</td>
+                <td>{{  $scores['hw'][1]  }}</td>
+                <td>{{  $scores['hw'][2]  }}</td>
+                <td>{{  $scores['hw'][3]  }}</td>
+                <td>{{  $scores['hw'][4]  }}</td>
+                <td>{{  $scores['hw'][5]  }}</td>
+                <td>{{  $scores['hw'][6]  }}</td>
+                <td>{{  $scores['hw'][7]  }}</td>
+                <td>{{  $scores['hw'][8]  }}</td>
+                <td>{{  $scores['hw'][9]  }}</td>
+                <td>{{  $scores['hw'][10]  }}</td>
+                <td>{{  $scores['hw'][11]  }}</td>
+                <td>{{  $scores['hw'][12]  }}</td>
             </tr>
             <tr>
                 <td>Problem Bs</td>
-                <td>1</td>
-                <td>1.0</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{  $scores['bs']['sum']  }}</td>
+                <td>{{  $scores['bs'][1]  }}</td>
+                <td>{{  $scores['bs'][2]  }}</td>
+                <td>{{  $scores['bs'][3]  }}</td>
+                <td>{{  $scores['bs'][4]  }}</td>
+                <td>{{  $scores['bs'][5]  }}</td>
+                <td>{{  $scores['bs'][6]  }}</td>
+                <td>{{  $scores['bs'][7]  }}</td>
+                <td>{{  $scores['bs'][8]  }}</td>
+                <td>{{  $scores['bs'][9]  }}</td>
+                <td>{{  $scores['bs'][10]  }}</td>
+                <td>{{  $scores['bs'][11]  }}</td>
+                <td>{{  $scores['bs'][12]  }}</td>
             </tr>
             <tr>
                 <td>Kattis Sets</td>
-                <td>1</td>
-                <td>1.0</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
+                <td>{{  $scores['ks']['sum']  }}</td>
+                <td>{{  $scores['ks'][1]  }}</td>
+                <td>{{  $scores['ks'][2]  }}</td>
+                <td>{{  $scores['ks'][3]  }}</td>
+                <td>{{  $scores['ks'][4]  }}</td>
+                <td>{{  $scores['ks'][5]  }}</td>
+                <td>{{  $scores['ks'][6]  }}</td>
+                <td>{{  $scores['ks'][7]  }}</td>
+                <td>{{  $scores['ks'][8]  }}</td>
+                <td>{{  $scores['ks'][9]  }}</td>
+                <td>{{  $scores['ks'][10]  }}</td>
+                <td>{{  $scores['ks'][11]  }}</td>
+                <td>{{  $scores['ks'][12]  }}</td>
             </tr>
             <tr>
                 <td>Achievements</td>
-                <td>4</td>
-                <td>1</td>
-                <td>1</td>
-                <td>2</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td class="negative">x</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{  $scores['ac']['sum']  }}</td>
+                <td>{{  $scores['ac'][1]  }}</td>
+                <td>{{  $scores['ac'][2]  }}</td>
+                <td>{{  $scores['ac'][3]  }}</td>
+                <td>{{  $scores['ac'][4]  }}</td>
+                <td>{{  $scores['ac'][5]  }}</td>
+                <td>{{  $scores['ac'][6]  }}</td>
+                <td>{{  $scores['ac'][7]  }}</td>
+                <td>{{  $scores['ac'][8]  }}</td>
+                <td>{{  $scores['ac'][9]  }}</td>
+                <td>{{  $scores['ac'][10]  }}</td>
+                <td>{{  $scores['ac'][11]  }}</td>
+                <td>{{  $scores['ac'][12]  }}</td>
             </tr>
             </tbody>
         </table>
