@@ -47,10 +47,10 @@
 
         $.each([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function (i) {
 
-            $.getJSON('http://127.0.0.1:8000/students/' + i + '/weeklySums', function (data) {
+            $.getJSON('{{\Illuminate\Support\Facades\URL::to('/')}}/students/' + i + '/weeklySums', function (data) {
 
-                seriesOptions[i] = {
-                    name: studentNames[i],
+                seriesOptions[i-1] = {
+                    name: studentNames[i-1],
                     data: data
                 };
 
