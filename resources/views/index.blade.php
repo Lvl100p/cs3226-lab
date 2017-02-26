@@ -20,7 +20,7 @@
     {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
-    {{ Html::script('js/main.js') }}
+    {{ Html::script('js/table-sorting.js') }}
     
     <script type="text/javascript">
         $('.intro-parallax-container').parallax();
