@@ -31,8 +31,8 @@ class AchievementController extends Controller
 
         // Check that the requested tier does not exceed the maximum allowable tier for that achievement
         if ($requestedTier > $maxTier) {
-            $msg = "Achievement '$achvName' does not have a tier of '$requestedTier'.";
-            return view('achievements', ['msg' => $msg, 'defaultAchv' => $requestedAchvId, 'defaultTier' => $requestedTier]);
+            $errorMsg = "Achievement '$achvName' does not have a tier of '$requestedTier'.";
+            return view('achievements', ['errorMsg' => $errorMsg, 'defaultAchv' => $requestedAchvId, 'defaultTier' => $requestedTier]);
         }
 
         // Get the students with the requested achievement id and tier
