@@ -1,47 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page not found</title>
+@extends('template')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('page-title', 'CS3226 Lab: Page Not Found')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('content-title', 'CS3226 Lab: Page Not Found')
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
+@section('stylesheet')
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+@endsection
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+@section('script')
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">There was an error trying to reach this website, please check your URL.</div>
-            </div>
-        </div>
-    </body>
-</html>
+@endsection
+
+@section('content')
+
+    <p style="text-align: center; font-size: 36px;">&lt;404 World Not Found&gt;</p>
+
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <img src="img/404.png" alt="404 page not found"/>
+    </div>
+
+    <p style="text-align: center; font-size: 20px; margin-top: 36px;"><a href="/">Back to the pipe?</a></p>
+
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <a href="/"><img src="img/pipe.png" alt="404 page not found" width="200" height="200"/></a>
+    </div>
+@endsection
