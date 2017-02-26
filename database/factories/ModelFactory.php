@@ -39,6 +39,10 @@ $factory->define(App\Student::class, function(Faker\Generator $faker){
 
     $sum = $spe + $dil;
 
+    $email = $faker->unique()->safeEmail;
+    $password = bcrypt('secret');
+    $remember_token = str_random('10');
+
     return [
         'rank' => $rank,
         'nickname' => $nickname,
@@ -52,6 +56,9 @@ $factory->define(App\Student::class, function(Faker\Generator $faker){
         'ks' => $ks,
         'ac'  => $ac,
         'dil'  => $dil,
-        'sum' => $sum
+        'sum' => $sum,
+        'email' => $email,
+        'password' => $password,
+        'remember_token' => $remember_token
     ];
 });

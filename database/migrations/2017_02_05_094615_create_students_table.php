@@ -28,6 +28,9 @@ class CreateStudentsTable extends Migration
             $table->integer('ac');
             $table->integer('dil');
             $table->integer('sum');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
