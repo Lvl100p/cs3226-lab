@@ -185,72 +185,77 @@
                 <td></td>
                 <td></td>
             </tr>
-        </tbody>
-    </table>
-</section>
+            </tbody>
+        </table>
+    </section>
 
-<p>&nbsp;</p>
+    <p>&nbsp;</p>
 
-<section id="achievements">
-    <h2>Achivements</h2>
-    <ol>
-        <li>Let it begins</li>
-        <li>Quick starter</li>
-        <li>Active in class 2/3</li>
-    </ol>
+    <section id="achievements">
+        <h2>Achivements</h2>
+        <ol>
+            <li>Let it begins</li>
+            <li>Quick starter</li>
+            <li>Active in class 2/3</li>
+        </ol>
 
-</section>
+    </section>
 
-<p>&nbsp;</p>
+    <p>&nbsp;</p>
 
-<section id="comments">
-    <h2>Public Comments</h2>
+    <section id="comments">
+        <h2>Public Comments</h2>
 
-    <div class="bs-callout bs-callout-success">
-        <h4>IOI Silver Medalist 2015</h4>
-        Own like a pro!
-    </div>
+        <div class="bs-callout bs-callout-success">
+            <h4>IOI Silver Medalist 2015</h4>
+            Own like a pro!
+        </div>
 
-    <div class="bs-callout bs-callout-success">
-        <h4>ICPC Jakarta 2016 runner-up (TeamTam)</h4>
-        Own like a pro!
-    </div>
+        <div class="bs-callout bs-callout-success">
+            <h4>ICPC Jakarta 2016 runner-up (TeamTam)</h4>
+            Own like a pro!
+        </div>
 
-    <div class="bs-callout bs-callout-info">
-        <h4>Active in Class</h4>
-        <ul>
-            <li>Answer 1Q in L1</li>
-            <li>Answer 1Q on Week02</li>
-        </ul>
-    </div>
+        <div class="bs-callout bs-callout-info">
+            <h4>Active in Class</h4>
+            <ul>
+                <li>Answer 1Q in L1</li>
+                <li>Answer 1Q on Week02</li>
+            </ul>
+        </div>
 
-    <div class="bs-callout bs-callout-danger">
-        <h4>Late with HW1 once!</h4>
-        Tsk Tsk
-    </div>
+        <div class="bs-callout bs-callout-danger">
+            <h4>Late with HW1 once!</h4>
+            Tsk Tsk
+        </div>
+		
+		<div>
+		<i>
+		Created on
+		<?php use Carbon\Carbon; ?>
+		<?php setlocale(LC_TIME, 'English');
+		echo $student->created_at->formatLocalized('%A %d %B %Y'); ?>
+		</i>
+		</div>
 	
-	<div>
-	<i>
-	Created on
-	<?php use Carbon\Carbon; ?>
-	<?php setlocale(LC_TIME, 'English');
-	echo $student->created_at->formatLocalized('%A %d %B %Y'); ?>
-	</i>
-	</div>
-	
-	<div>
-	<i>
-	Last updated
-	<?php 
-	echo $student->updated_at->diffForHumans();?>
-	</i>
-	</div>
-</section>
+		<div>
+		<i>
+		Last updated
+		<?php 
+		echo $student->updated_at->diffForHumans();?>
+		</i>
+		</div>
 
-<section id="delete">
-    {!! Form::model($student, ['action' => ['StudentController@destroy', $student->id], 'method' => 'delete', 'id'=>'form-delete']) !!}
-    {!! Form::submit('Delete', ['class'=>'btn btn-danger', 'id'=>'btn-delete']) !!}
-    {!! Form::close() !!}
-</section>
+    </section>
+
+    @if(\Illuminate\Support\Facades\Auth::check())
+        <section id="form">
+            {!! Form::model($student, ['action' => ['StudentController@destroy', $student->id], 'method' => 'delete',
+            'id'=>'form-delete']) !!}
+            <a class="btn btn-warning" href="{{$student->id}}/edit">Edit</a>
+            {!! Form::submit('Delete', ['class'=>'btn btn-danger', 'id'=>'btn-delete']) !!}
+            {!! Form::close() !!}
+        </section>
+    @endif
 
 @endsection

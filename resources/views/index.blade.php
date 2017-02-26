@@ -67,13 +67,17 @@
                 <img src="./img/intro.png" alt="top-three"/>
             </div>
 
-            <div class="intro col-md-4" style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
-                <h1>CS3233 Competitive Programming Rank List </h1>
+            <div class="intro col-md-4"
+                 style="position: absolute; top: 100px; left: 25px; background-color: #00000022;margin: 10px; padding: 20px; border-radius: 5%;">
+                <h1>CS3233 Competitive Programming Rank List</h1>
+				
 				<p><i>Last updated 
-				<?php use Carbon\Carbon;
-				echo Carbon::createFromFormat('Y-m-d H:i:s',DB::table('students')->max('updated_at'))->diffForHumans();				?>
+				    <?php use Carbon\Carbon;
+				    echo Carbon::createFromFormat('Y-m-d H:i:s',DB::table('students')->max('updated_at'))->diffForHumans();?>
 				</i></p>
-                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited high school students who want
+
+                <p style="text-align: justify;">It will benefit NUS students who want to compete in ACM ICPC, invited
+                    high school students who want
                     to compete in IOI (not just for NOI), and NUS students in general who aspire to excel in technical
                     interviews of top IT companies.</p>
 
