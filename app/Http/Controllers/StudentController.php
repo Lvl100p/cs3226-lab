@@ -97,9 +97,40 @@ class StudentController extends Controller
     {
 
         $student = Student::find($id);
+        $student->scores;
+        $mc = ['sum' => 0];
+        $tc = ['sum' => 0];
+        $hw = ['sum' => 0];
+        $bs = ['sum' => 0];
+        $ks = ['sum' => 0];
+        $ac = ['sum' => 0];
 
+        foreach ($student->scores as $week) {
+           $mc['sum'] = $mc['sum'] + $week['mc'];
+           $tc['sum'] = $tc['sum'] + $week['tc'];
+           $hw['sum'] = $hw['sum'] + $week['hw'];
+           $bs['sum'] = $bs['sum'] + $week['bs'];
+           $ks['sum'] = $ks['sum'] + $week['ks'];
+           $ac['sum'] = $ac['sum'] + $week['ac'];
+
+           $mc[$week->week] = $week->mc;
+           $tc[$week->week] = $week->tc;
+           $hw[$week->week] = $week->hw;
+           $bs[$week->week] = $week->bs;
+           $ks[$week->week] = $week->ks;
+           $ac[$week->week] = $week->ac;
+        }
+
+        $scores = [
+            'mc' => $mc, 
+            'tc' => $tc, 
+            'hw' => $hw, 
+            'bs' => $bs, 
+            'ks' => $ks, 
+            'ac' => $ac];
         return view('detail', [
-            'student' => $student
+            'student' => $student,
+            'scores' => $scores
         ]);
     }
 
