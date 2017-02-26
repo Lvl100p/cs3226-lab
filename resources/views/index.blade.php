@@ -20,6 +20,8 @@
     {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
     {{ Html::script('js/confetti.js') }}
+    {{ Html::script('js/main.js') }}
+    
     <script type="text/javascript">
         $('.intro-parallax-container').parallax();
         $('.chart-parallax-container').parallax();

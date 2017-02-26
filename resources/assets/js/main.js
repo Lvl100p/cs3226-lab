@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
     //highlightHighestOfCol(table);
 });
 
-function highlightHighestOfCol(table){
+function highlightHighestOfCol(table){//JS implementation of highlighting max values in a column, seems outdated
     table.columns().every(function(colIndex) {
         if(colIndex <3){
             return;
@@ -39,7 +39,8 @@ function highlightHighestOfCol(table){
 function fireEventsWhenOrdered(table){
     jQuery('#ranktable').on("order.dt", function(){
         resetRowHeight(table);
-        adjustRowHeightToDiff(table);
+	var colIdx = getCurrSortColIdx(table);
+        adjustRowHeightToDiff(table,colIdx);
     });
 }
 
@@ -49,31 +50,38 @@ function resetRowHeight(table){
     });
 }
 
-function adjustRowHeightToDiff(table){
+function getCurrSortColIdx(table){
+    var currOrder = table.order();
+    var currColIdx = currOrder[0][0];
+    console.log('Column index currently sorted:' + currColIdx);//for testing
+    return currColIdx;
+}
+
+function adjustRowHeightToDiff(table,colIdx){
 
     var prevSumCell;
     table.rows().every(function(rowIdx, tableLoop, rowLoop){
-        if(rowIdx != 0){
+        if(rowIdx != 0 && colIdx>=3){
             var currSumCell = table.cell({
                 row: rowIdx,
-                column: 11
+                column: colIdx,
             }).node();
 
             var gap = Math.abs(jQuery(currSumCell).text() - jQuery(prevSumCell).text());
             var currRowHeight = jQuery(this.node()).height();
 
-            jQuery(this.node()).height(currRowHeight+gap*4);
+            jQuery(this.node()).height(currRowHeight*(1+gap*0.2));//changed the rule to 1point => 20% standard row height
         }
 
         prevSumCell = table.cell({
             row: rowIdx,
-            column: 11
+            column: colIdx,
         }).node();
 
     });
 }
 
-function highlightSumRow(table){
+function highlightSumRow(table){//JS implementation of highlighting rows with highest sum, seems outdated
     var sums = table.column(11).data().sort().reverse().filter(function(item, pos, arr){
         // remove duplicates
         return !pos || item != arr[pos -1];
