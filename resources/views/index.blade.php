@@ -32,42 +32,45 @@
         });
         $('#ranktable_filter input').attr("placeholder", "Search here!")
 
-        var seriesOptions = [],
-                seriesCounter = 0,
-                names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
-        var chart = createChart();
-        createChartOptions(chart);
+        var studentCount = 10;
+        var seriesOptions = [];
+        var seriesCounter=0;
 
-        function createChart() {
 
-            // generate dummy data
-            $.each(names, function (i, name) {
+        var studentNames = [
+                @foreach($student_names as $student_name)
+                "{{$student_name}}",
+                @endforeach
+        ];
+
+
+        $.each([1,2,3,4,5,6,7,8,9,10], function(i){
+
+            $.getJSON('http://127.0.0.1:8000/students/' + i + '/weeklySums',    function (data) {
 
                 seriesOptions[i] = {
-                    name: name,
-                    data: [
-                        [1485907200000, getRandomInt(0, 100)], // wk1
-                        [1485993600000, getRandomInt(0, 100)], // wk2
-                        [1486080000000, getRandomInt(0, 100)], // wk3
-                        [1486339200000, getRandomInt(0, 100)], // wk4
-                        [1486425600000, getRandomInt(0, 100)], // wk5
-                        [1486512000000, getRandomInt(0, 100)], // wk6
-                        [1486598400000, getRandomInt(0, 100)], // wk7
-                        [1486684800000, getRandomInt(0, 100)], // wk8
-                        [1486944000000, getRandomInt(0, 100)], // wk9
-                        [1487030400000, getRandomInt(0, 100)], // wk10
-                        [1487116800000, getRandomInt(0, 100)], // wk11
-                        [1487203200000, getRandomInt(0, 100)], // wk12
-                        [1487289600000, getRandomInt(0, 100)] // wk13
-                    ]
+                    name: studentNames[i],
+                    data: data
                 };
+
+                // As we're loading the data asynchronously, we don't know what order it will arrive. So
+                // we keep a counter and create the chart when all the data is loaded.
+                seriesCounter += 1;
+
+                if (seriesCounter === 10) {
+                    var chart = createChart(seriesOptions);
+                    createChartOptions(chart);
+                }
             });
+        });
+
+        function createChart(seriesOptions) {
 
             var chart = Highcharts.stockChart('chart', {
 
                 rangeSelector: {
-                    selected: 4
+                    enabled: false
                 },
 
                 yAxis: {
@@ -83,7 +86,9 @@
                     }]
                 },
                 xAxis: {
+                    allowDecimals: false,
                     labels: {
+                        format: "Week {value}",
                         rotation: -45
                     }
                 },
@@ -96,7 +101,9 @@
                 },
 
                 tooltip: {
-                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    backgroundColor: "#2a2c31",
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b style="color: {series.color}">{point.y}</b><br/>',
+                    headerFormat: '<span style="color:white;">Week {point.x}</span>',
                     valueDecimals: 1,
                     split: true
                 },
@@ -114,9 +121,7 @@
                 }
             });
 
-            $('#chart-options').select2({
-
-            });
+            $('#chart-options').select2();
 
             $('select').on('change', function (evt) {
                 var selectedSeries = $('#chart-options').select2('val');
@@ -146,13 +151,14 @@
         <p class="alert alert-success alert-dismissable">{{ session('status') }}</p>
     @endif
 
-	@if (Session::has('message'))
-		<div class="alert alert-info alert-dismissable fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-			{{ Session::get('message') }}
-		</div>
+    @if (Session::has('message'))
+        <div class="alert alert-info alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            {{ Session::get('message') }}
+        </div>
     @endif
-    <div class="intro-parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50" data-natural-width="600"
+    <div class="intro-parallax-container visible-lg" data-parallax="scroll" data-position="top" data-bleed="50"
+         data-natural-width="600"
          data-natural-height="577">
         <div class="parallax-slider">
             <div class="first-prizes" style="position: absolute; top: 225px; left: 1000px;">
@@ -239,7 +245,8 @@
                         <a class="hint--top hint--bounce hint--error"
                            aria-label="Pork chop flank jerky corned beef chuck, &#10;cow boudin fatback ground round salami cupim pork loin."
                            href="#">
-                            <img class="avatar visible-lg-inline-block" src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/>
+                            <img class="avatar visible-lg-inline-block"
+                                 src="https://api.adorable.io/avatars/50/{{$student->nickname}}.png"/>
                         </a>
                         <strong><a href="/students/{{$student->id}}"><span
                                         class="student-name">{{$student->name}}</span></a></strong>
@@ -290,7 +297,9 @@
 
     <section class="row">
         <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-            <select id="chart-options" multiple="multiple" data-placeholder="Filter your result by typing the name of the student..." style="width:100%"></select>
+            <select id="chart-options" multiple="multiple"
+                    data-placeholder="Filter your result by typing the name of the student..."
+                    style="width:100%"></select>
         </div>
         <div id="chart" class="col-md-12"></div>
     </section>

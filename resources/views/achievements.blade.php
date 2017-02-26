@@ -8,9 +8,9 @@
 
 <?php
 
-// Display message from server, if there is any
-if (isset($msg)) {
-    echo $msg . "<br>\n";
+// Display error message from server, if there is any
+if (isset($errorMsg)) {
+    echo '<div class="alert alert-danger" role="alert">' . $errorMsg . "</div><br>\n";
 }
 
 $achievements = App\Achievement::all();
@@ -43,7 +43,7 @@ for ($i = 1; $i <= $maxPossibleTier; $i++) {
 echo '</select>' . "\n";
 echo Form::submit('Get students') . "\n";
 
-echo Form::close() . "\n";
+echo Form::close() . "<br><br>\n";
 
 // Display the students with the specified achievement and tier
 if (isset($students)) {

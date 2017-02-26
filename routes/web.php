@@ -18,6 +18,8 @@ Route::get('/help', function() {
 });
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
+Route::get('students/{students}/scores', 'StudentController@getScores');
+Route::get('students/{students}/weeklySums', 'StudentController@getWeeklySums');
 
 Route::get('/scores/edit', 'ScoreController@editDefault');
 Route::post('/scores/edit', 'ScoreController@edit');
