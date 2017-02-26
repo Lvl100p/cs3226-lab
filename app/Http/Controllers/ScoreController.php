@@ -10,7 +10,7 @@ use App\Score;
 class ScoreController extends Controller
 {
 	public function editDefault() {
-		$scores = $this->getScores('hw', 1);
+		$scores = $this->getScores('mc', 1);
 		return view('editScores', compact(['scores']));
 	}
 
@@ -25,17 +25,15 @@ class ScoreController extends Controller
 
 		for($i = 0; $i < $request->student_count; $i++) {
 			$score = Score::where('week', $week)
-										->where('score_type', $type)
 										->where('student_id', $request->input('student'.$i))
 										->first();
 			if(isset($score)) {
-				$score->score = $request->input('score'.$i);
+				$score->$type = $request->input('score'.$i);
 			} else {
 				$score = new Score;
 				$score->week = $week;
-				$score->score_type = $type;
+				$score->$type = $request->input('score'.$i);
 				$score->student_id = $request->input('student'.$i);
-				$score->score = $request->input('score'.$i);
 			}
 			$score->save();
 		}
@@ -48,8 +46,7 @@ class ScoreController extends Controller
 	private function getScores($type, $week) {
 		$scores = DB::table('scores')
 		->join('students', 'scores.student_id', '=', 'students.id')
-		->select('students.name', 'scores.score', 'students.id')
-		->where('scores.score_type', '=', $type)
+		->select('students.name', 'scores.'.$type, 'students.id')
 		->where('scores.week', '=', $week)
 		->orderby('students.name', 'asc')
 		->get();

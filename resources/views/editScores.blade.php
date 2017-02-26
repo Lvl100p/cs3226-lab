@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
 {!! Form::open(['url' => '/scores/edit']) !!}
 <div class="row form-inline text-right">
     <div class="form-group ">
@@ -25,7 +26,6 @@
         {!! Form::submit('Get scores!', ['class' => 'btn btn-default']); !!}
 </div>
 {!! Form::close() !!}
-
 <div class="row">
 {!!  Form::open(['url'=>'/scores/edit', 'method'=>'put'])  !!}
     {!! Form::hidden('week', empty($request)? '1': $request->week)!!}
@@ -40,7 +40,7 @@
             @foreach($scores as $index => $score)
             <tr>
                 <td>{{  $score->name  }}</td>
-                <td>{!!  Form::number('score' . $index, isset($score->score)? $score->score : null, ['class' => 'form-control score-input', 'placeholder' => '?'])  !!}</td>
+                <td>{!!  Form::number('score' . $index, $score->{empty($request)? 'mc': $request->type}, ['class' => 'form-control score-input', 'placeholder' => '?'])  !!}</td>
                 {!! Form::hidden('student' . $index, $score->id) !!}
             </tr>
             @endforeach
