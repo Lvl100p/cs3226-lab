@@ -35,4 +35,8 @@ class Student extends Authenticatable
     public function scores(){
         return $this->hasMany('App\Score');
     }
+
+    public function achievements(){
+        return $this->belongsToMany('App\Achievement', 'earned', 'student_id', 'achievement_id');
+    }
 }

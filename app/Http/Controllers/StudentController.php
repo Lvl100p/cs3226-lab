@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Earned;
 use App\Score;
 use App\Student;
 use Illuminate\Http\Request;
@@ -79,7 +80,7 @@ class StudentController extends Controller
         $third_prizes = $students->where('sum', $thirdSum)->values();
 
         $student_names = Student::all()
-            ->transform(function($student){
+            ->transform(function ($student) {
                 return $student->name;
             });
 
@@ -91,7 +92,7 @@ class StudentController extends Controller
             'student_names' => $student_names
         ]);
     }
-	
+
 
     public function show($id)
     {
@@ -106,31 +107,36 @@ class StudentController extends Controller
         $ac = ['sum' => 0];
 
         foreach ($student->scores as $week) {
-           $mc['sum'] = $mc['sum'] + $week['mc'];
-           $tc['sum'] = $tc['sum'] + $week['tc'];
-           $hw['sum'] = $hw['sum'] + $week['hw'];
-           $bs['sum'] = $bs['sum'] + $week['bs'];
-           $ks['sum'] = $ks['sum'] + $week['ks'];
-           $ac['sum'] = $ac['sum'] + $week['ac'];
+            $mc['sum'] = $mc['sum'] + $week['mc'];
+            $tc['sum'] = $tc['sum'] + $week['tc'];
+            $hw['sum'] = $hw['sum'] + $week['hw'];
+            $bs['sum'] = $bs['sum'] + $week['bs'];
+            $ks['sum'] = $ks['sum'] + $week['ks'];
+            $ac['sum'] = $ac['sum'] + $week['ac'];
 
-           $mc[$week->week] = $week->mc;
-           $tc[$week->week] = $week->tc;
-           $hw[$week->week] = $week->hw;
-           $bs[$week->week] = $week->bs;
-           $ks[$week->week] = $week->ks;
-           $ac[$week->week] = $week->ac;
+            $mc[$week->week] = $week->mc;
+            $tc[$week->week] = $week->tc;
+            $hw[$week->week] = $week->hw;
+            $bs[$week->week] = $week->bs;
+            $ks[$week->week] = $week->ks;
+            $ac[$week->week] = $week->ac;
         }
 
         $scores = [
-            'mc' => $mc, 
-            'tc' => $tc, 
-            'hw' => $hw, 
-            'bs' => $bs, 
-            'ks' => $ks, 
+            'mc' => $mc,
+            'tc' => $tc,
+            'hw' => $hw,
+            'bs' => $bs,
+            'ks' => $ks,
             'ac' => $ac];
+
+        $achievements = Student::find($id)
+            ->achievements;
+
         return view('detail', [
             'student' => $student,
-            'scores' => $scores
+            'scores' => $scores,
+            'achievements' => $achievements
         ]);
     }
 

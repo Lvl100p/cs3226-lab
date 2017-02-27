@@ -6,6 +6,7 @@
 
 @section('stylesheet')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css">
+    {{ Html::style('css/flags.css')}}
 @endsection
 
 @section('script')
@@ -34,7 +35,7 @@
 @section('content')
     <section id="summary">
         <h1>{{$student->name}}
-            <small>in CS3233 S2 AY 2016/17</small>
+            <i class="flag flag-{{ strtolower($student->flag) }}" style="vertical-align: sub;"></i>
         </h1>
 
         @if (Session::has('message'))
@@ -49,27 +50,35 @@
                 <div class="col-md-6">
                     <canvas id="radarChart" width="550" , height="550"></canvas>
                 </div>
-                <div class="col-md-6 vcenter" style="height: 500px;">
+                <div class="col-md-6" style="height: 500px;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="https://api.adorable.io/avatars/200/{{$student->nickname}}.png" width="200"
+                                 height="200"/>
+                        </div>
+                    </div>
+
                     <table class="table">
-                        <tr>
-                            <td><img src="/img/uploads/{{$student->id}}.png" width="200" height="200"/></td>
-                        </tr>
                         <tr>
                             <td>Kattis account</td>
                             <td>{{$student->nickname}}</td>
                         </tr>
                         <tr>
                             <td>SPE(ed) component</td>
-                            <td>{{  $scores['mc']['sum']  }} + {{  $scores['tc']['sum']  }} = {{  $scores['mc']['sum'] +  $scores['tc']['sum'] }}</td>
+                            <td>{{  $scores['mc']['sum']  }} + {{  $scores['tc']['sum']  }}
+                                = {{  $scores['mc']['sum'] +  $scores['tc']['sum'] }}</td>
                         </tr>
                         <tr>
                             <td>DIL(igence) component</td>
-                            <td>{{  $scores['hw']['sum']  }} + {{$scores['bs']['sum']}} + {{$scores['ks']['sum']}} + {{$scores['ac']['sum']}}
+                            <td>{{  $scores['hw']['sum']  }} + {{$scores['bs']['sum']}} + {{$scores['ks']['sum']}}
+                                + {{$scores['ac']['sum']}}
                                 = {{$scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']}}</td>
                         </tr>
                         <tr>
                             <td>Sum</td>
-                            <td>SPE + DIL = {{  $scores['mc']['sum'] +  $scores['tc']['sum']  }} + {{  $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }} = {{$scores['mc']['sum'] +  $scores['tc']['sum'] + $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }}</td>
+                            <td>SPE + DIL = {{  $scores['mc']['sum'] +  $scores['tc']['sum']  }}
+                                + {{  $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }}
+                                = {{$scores['mc']['sum'] +  $scores['tc']['sum'] + $scores['hw']['sum'] + $scores['bs']['sum'] + $scores['ks']['sum'] +  $scores['ac']['sum']  }}</td>
                         </tr>
                     </table>
                 </div>
@@ -204,11 +213,11 @@
     <p>&nbsp;</p>
 
     <section id="achievements">
-        <h2>Achivements</h2>
+        <h2>Achievements</h2>
         <ol>
-            <li>Let it begins</li>
-            <li>Quick starter</li>
-            <li>Active in class 2/3</li>
+            @foreach($achievements as $achievement)
+                <li>{{$achievement->name}}</li>
+            @endforeach
         </ol>
 
     </section>
