@@ -29,5 +29,3 @@ Route::get('/achievements', 'AchievementController@index');
 Route::post('/achievements', 'AchievementController@getStudents');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
