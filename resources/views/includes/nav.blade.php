@@ -23,25 +23,40 @@
 
             <ul class="nav navbar-nav navbar-right">
 
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ Config::get('app.locales')[App::getLocale()] }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach (Config::get('app.locales') as $lang => $locale)
+                        @if ($lang != App::getLocale())
+                        <li>
+                            <a href="{{ route('lang.change', $lang)}}">{{$locale}}</a>
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
+                </li>
+
                 @if(\Illuminate\Support\Facades\Auth::check())
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Hello, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}!</strong> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li class="{{ \Illuminate\Support\Facades\Request::is('students/create') ? 'active' : null }}"><a href="students/create">Create Student Account</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li>
-                                <form method="POST" action="{{ url('/logout') }}">
-                                    {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <div class="col-md-offset-7 col-md-5">
-                                            <button type="submit" class="btn btn-sm btn-danger">Logout</button>
-                                        </div>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">Hello, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}!</strong> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ \Illuminate\Support\Facades\Request::is('students/create') ? 'active' : null }}"><a href="students/create">Create Student Account</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <form method="POST" action="{{ url('/logout') }}">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <div class="col-md-offset-7 col-md-5">
+                                        <button type="submit" class="btn btn-sm btn-danger">Logout</button>
                                     </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 @else
                     <li class="{{ \Illuminate\Support\Facades\Request::is('login') ? 'active' : null }}">
                         <a href="/login">Login</a>
