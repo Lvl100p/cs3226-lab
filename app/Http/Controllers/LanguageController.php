@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 class LanguageController extends Controller
 {
     public function changeLang($lang){//check and set the language of current session
-    	if(array_key_exists($lang, Config::get('languages'))){
+    	if(array_key_exists($lang, Config::get('app.locales'))){
     		Session::set('currlocale',$lang);
     	}
     	return Redirect::back();
