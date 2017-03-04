@@ -28,4 +28,8 @@ Route::put('/scores/edit', 'ScoreController@update');
 Route::get('/achievements', 'AchievementController@index');
 Route::post('/achievements', 'AchievementController@getStudents');
 
+Route::get('/{locale}', function($locale){
+	App::setLocale($locale);
+});
+
 Auth::routes();
