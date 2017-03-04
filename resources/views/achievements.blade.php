@@ -19,7 +19,7 @@ $maxPossibleTier = App\Achievement::max('max_tier');
 echo Form::open() . "\n";
 
 // Drop down list of achievements
-echo Form::label('achievement', 'Achievement') . "\n";
+echo Form::label('achievement', trans('lang.Achievements')) . "\n";
 echo '<select name="achievement">' . "\n";
 foreach ($achievements as $achievement) {
     echo "<option value='$achievement->id'";
@@ -31,7 +31,7 @@ foreach ($achievements as $achievement) {
 echo '</select>' . "\n";
 
 // Drop down list of tiers
-echo Form::label('tier', 'Tier') . "\n";
+echo Form::label('tier', trans('lang.Tier')) . "\n";
 echo '<select name="tier">' . "\n";
 for ($i = 1; $i <= $maxPossibleTier; $i++) {
     echo "<option value='$i'";
@@ -41,7 +41,7 @@ for ($i = 1; $i <= $maxPossibleTier; $i++) {
     echo ">$i</option>" . "\n";
 }
 echo '</select>' . "\n";
-echo Form::submit('Get students') . "\n";
+echo Form::submit(trans('lang.GetStudents')) . "\n";
 
 echo Form::close() . "<br><br>\n";
 

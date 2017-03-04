@@ -1,8 +1,8 @@
 @extends('template')
 
-@section('page-title', 'CS3226 Lab: Rank List')
+@section('page-title', trans('lang.Title'))
 
-@section('content-title', 'CS3226 Lab: Rank List')
+@section('content-title', trans('lang.Title'))
 
 @section('stylesheet')
     {{ Html::style('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css')}}
@@ -224,10 +224,10 @@
         <table id="ranktable" class="table table-hover table-responsive" width="100%" cellspacing="0">
             <thead>
             <tr>
-                <th>Rank</th>
-                <th class="hidden-xs">Flag</th>
-                <th class="hidden-xs">Name</th>
-                <th class="visible-xs">Nickname</th>
+                <th>{{ trans('lang.Rank')}}</th>
+                <th class="hidden-xs">{{ trans('lang.Flag')}}</th>
+                <th class="hidden-xs">{{ trans('lang.Name')}}</th>
+                <th class="visible-xs">{{ trans('lang.Nickname')}}</th>
                 <th class="hidden-xs">MC</th>
                 <th class="hidden-xs">TC</th>
                 <th>SPE</th>
@@ -236,7 +236,7 @@
                 <th class="hidden-xs">KS</th>
                 <th class="hidden-xs">AC</th>
                 <th>DIL</th>
-                <th>SUM</th>
+                <th>{{ trans('lang.SUM')}}</th>
             </tr>
             </thead>
             <tbody>

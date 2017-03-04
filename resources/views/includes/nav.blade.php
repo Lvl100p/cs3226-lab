@@ -16,9 +16,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ \Illuminate\Support\Facades\Request::is('/') ? 'active' : null }}"><a href="{{ url('/') }}">Home</a></li>
-                <li class="{{ \Illuminate\Support\Facades\Request::is('help') ? 'active' : null }}"><a href="{{ url('/help') }}">Help</a></li>
-                <li class="{{ \Illuminate\Support\Facades\Request::is('achievements') ? 'active' : null }}"><a href="{{ url('/achievements') }}">{{ trans('lang.achievements')}}</a></li>
+                <li class="{{ \Illuminate\Support\Facades\Request::is('/') ? 'active' : null }}"><a href="{{ url('/') }}"> {{trans('lang.Home')}}</a></li>
+                <li class="{{ \Illuminate\Support\Facades\Request::is('help') ? 'active' : null }}"><a href="{{ url('/help') }}">{{ trans('lang.Help')}}</a></li>
+                <li class="{{ \Illuminate\Support\Facades\Request::is('achievements') ? 'active' : null }}"><a href="{{ url('/achievements') }}">{{ trans('lang.Achievements')}}</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -59,7 +59,7 @@
                 </li>
                 @else
                     <li class="{{ \Illuminate\Support\Facades\Request::is('login') ? 'active' : null }}">
-                        <a href="/login">Login</a>
+                        <a href="/login">{{ trans('lang.Login')}}</a>
                     </li>
                 @endif
             </ul>
