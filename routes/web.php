@@ -29,3 +29,6 @@ Route::get('/achievements', 'AchievementController@index');
 Route::post('/achievements', 'AchievementController@getStudents');
 
 Auth::routes();
+
+Route::resource('messages','MessageController', ['only' =>['index', 'show','update','destroy']]);
+

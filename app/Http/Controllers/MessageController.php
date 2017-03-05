@@ -47,7 +47,6 @@ class MessageController extends Controller {
 
     public function update($id, Request $request) {
         if(Auth::user()->access != "admin" && Auth::user()->id != $id) abort(403, 'Unauthorized action.');
-
     	$message = Student::find($id)->message;
         if(!isset($message)) {
         	$message = new Message();
