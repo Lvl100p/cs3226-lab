@@ -31,3 +31,6 @@ Route::post('/achievements', 'AchievementController@getStudents');
 Route::get('/languages/{lang}',['uses'=>'LanguageController@changeLang','as'=>'lang.change']);
 
 Auth::routes();
+
+Route::resource('messages','MessageController', ['only' =>['index', 'show','update','destroy']]);
+

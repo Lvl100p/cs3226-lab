@@ -38,5 +38,10 @@ class Student extends Authenticatable
 
     public function achievements(){
         return $this->belongsToMany('App\Achievement', 'earned', 'student_id', 'achievement_id');
+}
+    public function message()
+    {
+        return $this->hasOne(Message::class);
+
     }
 }
