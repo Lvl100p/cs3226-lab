@@ -1,4 +1,4 @@
 <!-- footer -->
 <footer class="center">
-    Copyright @ 2017 kfwong
+    {{ trans('lang.Copyright')}} @ 2017 kfwong
 </footer>

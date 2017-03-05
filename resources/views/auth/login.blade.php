@@ -1,8 +1,8 @@
 @extends('template')
 
-@section('page-title', 'Login')
+@section('page-title', trans('lang.Title').':'.trans('lang.Login'))
 
-@section('content-title', 'Login')
+@section('content-title', trans('lang.Title').':'.trans('lang.Login'))
 
 @section('stylesheet')
 
@@ -17,13 +17,13 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">{{ trans('lang.Login')}}</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label">{{ trans('lang.EmailAdd')}}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email"
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                            <label for="password" class="col-md-4 control-label">{{ trans('lang.Password')}}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -57,8 +57,7 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}>
-                                        Remember
-                                        Me
+                                        {{ trans('lang.RememberMe')}}
                                     </label>
                                 </div>
                             </div>
@@ -67,15 +66,15 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Login
+                                    {{ trans('lang.Login')}}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
+                                    {{ trans('lang.ForgotPwd')}}
                                 </a>
                                 <span>&nbsp;|&nbsp;</span>
                                 <a class="btn btn-link" href="{{ url('/register') }}">
-                                    Register
+                                    {{ trans('lang.Register')}}
                                 </a>
                             </div>
                         </div>

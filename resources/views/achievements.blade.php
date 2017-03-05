@@ -1,8 +1,8 @@
 @extends('template')
 
-@section('page-title', 'CS3226 Lab: Achievements')
+@section('page-title', trans('lang.Title').':'.trans('lang.Achievements'))
 
-@section('content-title', 'CS3226 Lab: Achievements')
+@section('content-title', trans('lang.Title').':'.trans('lang.Achievements'))
 
 @section('content')
 

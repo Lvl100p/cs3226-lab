@@ -5,7 +5,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">{{ trans('lang.ToggleNav')}}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -43,14 +43,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                     aria-expanded="false">Hello, <strong>{{\Illuminate\Support\Facades\Auth::user()->name}}!</strong> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="{{ \Illuminate\Support\Facades\Request::is('students/create') ? 'active' : null }}"><a href="students/create">Create Student Account</a></li>
+                        <li class="{{ \Illuminate\Support\Facades\Request::is('students/create') ? 'active' : null }}"><a href="students/create">{{ trans('lang.CreateAcc')}}</a></li>
                         <li role="separator" class="divider"></li>
                         <li>
                             <form method="POST" action="{{ url('/logout') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <div class="col-md-offset-7 col-md-5">
-                                        <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">{{ trans('lang.Logout')}}</button>
                                     </div>
                                 </div>
                             </form>

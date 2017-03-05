@@ -228,14 +228,14 @@
                 <th class="hidden-xs">{{ trans('lang.Flag')}}</th>
                 <th class="hidden-xs">{{ trans('lang.Name')}}</th>
                 <th class="visible-xs">{{ trans('lang.Nickname')}}</th>
-                <th class="hidden-xs">MC</th>
-                <th class="hidden-xs">TC</th>
-                <th>SPE</th>
-                <th class="hidden-xs">HW</th>
-                <th class="hidden-xs">BS</th>
-                <th class="hidden-xs">KS</th>
-                <th class="hidden-xs">AC</th>
-                <th>DIL</th>
+                <th class="hidden-xs">{{ trans('lang.MC')}}</th>
+                <th class="hidden-xs">{{ trans('lang.TC')}}</th>
+                <th>{{ trans('lang.SPE')}}</th>
+                <th class="hidden-xs">{{ trans('lang.HW')}}</th>
+                <th class="hidden-xs">{{ trans('lang.BS')}}</th>
+                <th class="hidden-xs">{{ trans('lang.KS')}}</th>
+                <th class="hidden-xs">{{ trans('lang.AC')}}</th>
+                <th>{{ trans('lang.DIL')}}</th>
                 <th>{{ trans('lang.SUM')}}</th>
             </tr>
             </thead>

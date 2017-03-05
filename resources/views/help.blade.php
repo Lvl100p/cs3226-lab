@@ -1,24 +1,22 @@
 @extends('template')
 
-@section('page-title', 'CS3226 Lab: Help')
+@section('page-title', trans('lang.Title').':'.trans('lang.Help'))
 
-@section('content-title', 'CS3226 Lab: Help')
+@section('content-title', trans('lang.Title').':'.trans('lang.Help'))
 
 @section('content')
     <section>
 
-        <h3>Overview</h3>
+        <h3>{{ trans('help.OTitle')}}</h3>
 
-        <p>The purpose of this ranklist app is twofold:
+        <p>{{ trans('help.OMsg1')}}
         </p>
 
         <ol>
-            <li>As a gamification system to push the entire ~21 NUS students currently enrolled in Steven's <a
-                        href='http://www.comp.nus.edu.sg/~stevenha/cs3233.html'>CS3233</a> module to work as hard as
-                they can...
+            <li>{{ trans('help.OMsg2')}}<a
+                        href='http://www.comp.nus.edu.sg/~stevenha/cs3233.html'>CS3233</a>{{ trans('help.OMsg3')}}
             </li>
-            <li>As a testing platform for Steven to self-learn Laravel framework, to be subsequently taught to Steven's
-                <a href='http://www.comp.nus.edu.sg/~stevenha/cs3226.html'>CS3226</a> students :)
+            <li>{{ trans('help.OMsg4')}}<a href='http://www.comp.nus.edu.sg/~stevenha/cs3226.html'>CS3226</a>{{ trans('help.OMsg5')}}
             </li>
         </ol>
 
