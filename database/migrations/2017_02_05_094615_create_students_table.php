@@ -31,6 +31,7 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->dateTime('last_logged_in_at')->default(\Carbon\Carbon::now());
             $table->timestamps();
         });
     }
