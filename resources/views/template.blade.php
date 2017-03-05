@@ -64,14 +64,6 @@
     </div>
 </div>
 
-<div class="fb-like" 
-  data-href="188.166.214.134" 
-  data-layout="button" 
-  data-action="like" 
-  data-size="small" 
-  data-show-faces="true" 
-  data-share="true"></div>
-
 <div class="row">
 
     <main class="col-md-offset-1 col-md-10 col-md-offset-1">
