@@ -28,12 +28,13 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-  <div class="fb-like" 
-    data-href="http://www.your-domain.com/your-page.html" 
-    data-layout="standard" 
-    data-action="like" 
-    data-show-faces="true">
-  </div>
+<div class="fb-like" 
+  data-href="188.166.214.134" 
+  data-layout="button" 
+  data-action="like" 
+  data-size="small" 
+  data-show-faces="true" 
+  data-share="true"></div>
 
 <div class="row">
     <div class="col-md-12">
