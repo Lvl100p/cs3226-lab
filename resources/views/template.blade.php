@@ -16,6 +16,13 @@
 
     {{ Html::style('css/custom.css') }}
 
+    <!-- Used for facebook like -->
+    <meta property="og:url"           content="" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="(The best) CS3226 Ranklist" />
+    <meta property="og:description"   content="The best implemented CS3226 ranklist ever yet." />
+    <meta property="og:image"         content="http://ghk.h-cdn.co/assets/16/09/980x490/landscape-1457107485-gettyimages-512366437.jpg" />
+</head>
 </head>
 <body class="container-fluid full-height">
 
@@ -51,6 +58,12 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
+<div class="row">
+    <div class="col-md-12">
+        @include('includes.nav')
+    </div>
+</div>
+
 <div class="fb-like" 
   data-href="188.166.214.134" 
   data-layout="button" 
@@ -58,12 +71,6 @@
   data-size="small" 
   data-show-faces="true" 
   data-share="true"></div>
-
-<div class="row">
-    <div class="col-md-12">
-        @include('includes.nav')
-    </div>
-</div>
 
 <div class="row">
 
