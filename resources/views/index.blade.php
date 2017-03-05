@@ -1,8 +1,8 @@
 @extends('template')
 
-@section('page-title', 'CS3226 Lab: Rank List')
+@section('page-title', trans('lang.Title'))
 
-@section('content-title', 'CS3226 Lab: Rank List')
+@section('content-title', trans('lang.Title'))
 
 @section('stylesheet')
     {{ Html::style('https://cdn.jsdelivr.net/bootstrap.datatables/0.1/css/datatables.css')}}
@@ -30,7 +30,7 @@
             "dom": "fartp",
             "order": [[12, "desc"]]
         });
-        $('#ranktable_filter input').attr("placeholder", "Search here!")
+        $('#ranktable_filter input').attr("placeholder", "{{ trans('lang.SearchHere')}}")
 
 
         var studentCount = 10;
@@ -224,19 +224,19 @@
         <table id="ranktable" class="table table-hover table-responsive" width="100%" cellspacing="0">
             <thead>
             <tr>
-                <th>Rank</th>
-                <th class="hidden-xs">Flag</th>
-                <th class="hidden-xs">Name</th>
-                <th class="visible-xs">Nickname</th>
-                <th class="hidden-xs">MC</th>
-                <th class="hidden-xs">TC</th>
-                <th>SPE</th>
-                <th class="hidden-xs">HW</th>
-                <th class="hidden-xs">BS</th>
-                <th class="hidden-xs">KS</th>
-                <th class="hidden-xs">AC</th>
-                <th>DIL</th>
-                <th>SUM</th>
+                <th>{{ trans('lang.Rank')}}</th>
+                <th class="hidden-xs">{{ trans('lang.Flag')}}</th>
+                <th class="hidden-xs">{{ trans('lang.Name')}}</th>
+                <th class="visible-xs">{{ trans('lang.Nickname')}}</th>
+                <th class="hidden-xs">{{ trans('lang.MC')}}</th>
+                <th class="hidden-xs">{{ trans('lang.TC')}}</th>
+                <th>{{ trans('lang.SPE')}}</th>
+                <th class="hidden-xs">{{ trans('lang.HW')}}</th>
+                <th class="hidden-xs">{{ trans('lang.BS')}}</th>
+                <th class="hidden-xs">{{ trans('lang.KS')}}</th>
+                <th class="hidden-xs">{{ trans('lang.AC')}}</th>
+                <th>{{ trans('lang.DIL')}}</th>
+                <th>{{ trans('lang.SUM')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -303,7 +303,7 @@
     <section class="row">
         <div class="col-md-offset-1 col-md-10 col-md-offset-1">
             <select id="chart-options" multiple="multiple"
-                    data-placeholder="Filter your result by typing the name of the student..."
+                    data-placeholder="{{ trans('lang.FilterResult')}}"
                     style="width:100%"></select>
         </div>
         <div id="chart" class="col-md-12"></div>

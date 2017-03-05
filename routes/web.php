@@ -14,7 +14,7 @@
 Route::get('/', 'StudentController@index');
 
 Route::get('/help', function() {
-    return view('help');
+	return view('help');
 });
 
 Route::resource('students', 'StudentController', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
@@ -27,6 +27,8 @@ Route::put('/scores/edit', 'ScoreController@update');
 
 Route::get('/achievements', 'AchievementController@index');
 Route::post('/achievements', 'AchievementController@getStudents');
+
+Route::get('/languages/{lang}',['uses'=>'LanguageController@changeLang','as'=>'lang.change']);
 
 Auth::routes();
 
