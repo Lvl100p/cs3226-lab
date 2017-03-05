@@ -21,6 +21,8 @@ return [
    'AC' => '成就',
    'DIL' => '勤奋(总)',
    'SUM' => '总分',
+   'SearchHere' => '搜索...',
+   'FilterResult' => '按姓名筛选学生...',
    'Tier' => '级别',
    'GetStudents' => '搜索学生',
    'ToggleNav' => '切换导航',

@@ -30,7 +30,7 @@
             "dom": "fartp",
             "order": [[12, "desc"]]
         });
-        $('#ranktable_filter input').attr("placeholder", "Search here!")
+        $('#ranktable_filter input').attr("placeholder", "{{ trans('lang.SearchHere')}}")
 
 
         var studentCount = 10;
@@ -303,7 +303,7 @@
     <section class="row">
         <div class="col-md-offset-1 col-md-10 col-md-offset-1">
             <select id="chart-options" multiple="multiple"
-                    data-placeholder="Filter your result by typing the name of the student..."
+                    data-placeholder="{{ trans('lang.FilterResult')}}"
                     style="width:100%"></select>
         </div>
         <div id="chart" class="col-md-12"></div>

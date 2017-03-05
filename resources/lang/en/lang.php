@@ -21,6 +21,8 @@ return [
    'AC' => 'AC',
    'DIL' => 'DIL',
    'SUM' => 'SUM',
+   'SearchHere' => 'Search Here!',
+   'FilterResult' => 'Filter your result by typing the name of the student...',
    'Tier' => 'Tier',
    'GetStudents' => 'Get Students',
    'ToggleNav' => 'Toggle Navigation',
