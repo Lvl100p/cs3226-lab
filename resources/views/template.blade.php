@@ -58,6 +58,13 @@
 <!-- child specific scripts -->
 @yield('script')
 <script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+        });
+    };
 
     // Load the SDK Asynchronously
     (function (d) {
