@@ -19,7 +19,6 @@
     {{ Html::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js') }}
     {{ Html::script('js/highcharts-theme-monokai.js') }}
     {{ Html::script('js/parallax.min.js') }}
-    {{ Html::script('js/confetti.js') }}
     {{ Html::script('js/table-sorting.js') }}
 
     <script type="text/javascript">

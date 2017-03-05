@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Earned;
 use App\Score;
 use App\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -20,10 +18,38 @@ class StudentController extends Controller
 
     public function index()
     {
-        // retrieve data sort by sum descending order
-        $students = DB::table('students')
-            ->orderBy('sum', 'desc')
-            ->get();
+        // retrieve student data along with scores
+        $students = Student::with('scores')
+            ->get()
+            ->map(function ($student) {
+                // for each student, calculate their latest weekly score
+                $latest_score = $student->scores->reduce(function ($carry, $score) {
+                    if (empty($carry)) {
+                        return $score;
+                    } else {
+                        return $score->week > $carry->week ? $score : $carry;
+                    }
+                });
+
+                // assign the scores as new attributes
+                $student->mc = $latest_score->mc;
+                $student->tc = $latest_score->tc;
+                $student->spe = $latest_score->spe;
+                $student->hw = $latest_score->hw;
+                $student->bs = $latest_score->bs;
+                $student->ks = $latest_score->ks;
+                $student->ac = $latest_score->ac;
+                $student->dil = $latest_score->dil;
+                $student->sum = $latest_score->sum;
+
+                // remove bulky weekly data before transfer to client
+                unset($student->scores);
+
+                return $student;
+            });
+
+        // sort the student in descending order
+        $students = $students->sortByDesc('sum');
 
         // find out all the max value for each column
         $highestMc = $students->max('mc');
@@ -83,6 +109,13 @@ class StudentController extends Controller
             ->transform(function ($student) {
                 return $student->name;
             });
+
+
+        $students = $students->values();
+
+        for($i = 0; $i < sizeof($students); $i++){
+            $students[$i]->rank = $i+1;
+        }
 
         return view('index', [
             'students' => $students,

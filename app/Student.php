@@ -10,19 +10,9 @@ class Student extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'rank',
         'nickname',
         'name',
         'flag',
-        'mc',
-        'tc',
-        'spe',
-        'hw',
-        'bs',
-        'ks',
-        'ac',
-        'dil',
-        'sum',
         'email',
         'password'
     ];
