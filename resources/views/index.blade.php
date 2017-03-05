@@ -39,17 +39,19 @@
 
         var studentNames = [
             @foreach($student_names as $student_name)
+            @if($student_name != "admin")
             "{{$student_name}}",
-            @endforeach
-    ];
+            @endif
+        @endforeach
+];
 
 
         $.each([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function (i) {
 
             $.getJSON('{{\Illuminate\Support\Facades\URL::to('/')}}/students/' + i + '/weeklySums', function (data) {
 
-                seriesOptions[i-1] = {
-                    name: studentNames[i-1],
+                seriesOptions[i - 1] = {
+                    name: studentNames[i - 1],
                     data: data
                 };
 
@@ -57,11 +59,12 @@
                 // we keep a counter and create the chart when all the data is loaded.
                 seriesCounter += 1;
 
-                if (seriesCounter === 10) {
+                if (seriesCounter == 10) {
                     var chart = createChart(seriesOptions);
                     createChartOptions(chart);
                 }
             });
+
         });
 
         function createChart(seriesOptions) {
