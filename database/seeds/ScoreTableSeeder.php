@@ -29,20 +29,23 @@ class ScoreTableSeeder extends Seeder
                 }
         */
 
+        // 9 mc
+        // 2 tc
+        // 10 hw
+
         $faker = Faker\Factory::create();
 
         $studentCount = 25;
-        $scoreTypes = ['mc', 'tc', 'hw', 'bs', 'ks', 'ac'];
         $weekCount = 13;
 
         for ($studentId = 1; $studentId <= $studentCount; $studentId++) {
             for ($week = 1; $week <= $weekCount; $week++) {
-                $mc = $faker->numberBetween(0, 5);
-                $tc = $faker->numberBetween(0, 5);
-                $hw = $faker->numberBetween(0, 5);
-                $bs = $faker->numberBetween(0, 5);
-                $ks = $faker->numberBetween(0, 5);
-                $ac = $faker->numberBetween(0, 5);
+                $mc = $faker->numberBetween(0, 4);
+                $tc = $faker->numberBetween(0, 4);
+                $hw = $faker->numberBetween(0, 4);
+                $bs = $faker->numberBetween(0, 4);
+                $ks = $faker->numberBetween(0, 4);
+                $ac = $faker->numberBetween(0, 4);
 
                 DB::table('scores')->insert([
                     'student_id' => $studentId,

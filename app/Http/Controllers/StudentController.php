@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Earned;
 use App\Score;
 use App\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -16,14 +15,12 @@ class StudentController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show', 'getWeeklySums']]);
+        $this->middleware('admin', ['except' => ['index', 'show', 'getWeeklySums']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // retrieve data sort by sum descending order
-        $students = DB::table('students')
-            ->orderBy('sum', 'desc')
-            ->get();
+        $students = $this->getStudentInfoSortedDesc();
 
         // find out all the max value for each column
         $highestMc = $students->max('mc');
@@ -84,6 +81,44 @@ class StudentController extends Controller
                 return $student->name;
             });
 
+        if (!Auth::check()) {
+            // if it's a guest, show only top 7
+            $students = $students->take(7);
+        } else if (Auth::check() && $request->user()->access == 'student') {
+            // showing his/her position if he/she is outside TOP-7,
+            // plus the details of up to 1 (ONE) student exactly above/below him/her (if he/she is really last, then nobody is below him/her).
+            $student = $students->where('id', $request->user()->id);
+
+            $top7 = $students->take(7);
+
+            $studentV = $students->values();
+
+            $studentPeeks = collect([]);
+
+            for ($i = 0; $i < sizeof($studentV); $i++) {
+                if ($studentV[$i]->id == $request->user()->id) {
+                    if ($i - 1 > 0) {
+                        $studentPeeks->push($studentV[$i - 1]);
+                    }
+
+                    $studentPeeks->push($studentV[$i]);
+
+                    if (($i + 1) < sizeof($studentV)) {
+                        $studentPeeks->push($studentV[$i + 1]);
+                    }
+                }
+            }
+
+            $students = $top7->union($studentPeeks);
+        }
+
+
+        $students = $students->values();
+
+        for ($i = 0; $i < sizeof($students); $i++) {
+            $students[$i]->rank = $i + 1;
+        }
+
         return view('index', [
             'students' => $students,
             'first_prizes' => $first_prizes,
@@ -97,7 +132,16 @@ class StudentController extends Controller
     public function show($id)
     {
 
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
+
+        $top7 = $this->getStudentInfoSortedDesc()
+            ->take(7);
+
+        // don't allow guest to access student details not in top 7
+        if (!Auth::check() && !$top7->contains($student)) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $student->scores;
         $mc = ['sum' => 0];
         $tc = ['sum' => 0];
@@ -156,7 +200,6 @@ class StudentController extends Controller
         ]);
 
         $student = new Student();
-        $student->rank = 0;
         $student->name = $request->fullname;
         $student->nickname = $request->nickname;
         $student->flag = $request->nationality;
@@ -187,7 +230,7 @@ class StudentController extends Controller
 
     public function edit($id)
     {
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
         return view('edit', [
             'student' => $student
         ]);
@@ -220,7 +263,7 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
         Session::flash('message', "Student " . $student->name . " deleted.");
 
         Student::destroy($id);
@@ -241,8 +284,6 @@ class StudentController extends Controller
         $scores = Score::where('student_id', $id)
             ->get();
 
-        $student = Student::find($id);
-
         // transform the returning result by summing all score components
         $weeklySums = $scores->transform(function ($score) {
             $sum = $score->mc + $score->tc + $score->hw + $score->bs + $score->ks + $score->ac;
@@ -255,5 +296,47 @@ class StudentController extends Controller
 
         return collect($weeklySums)->toJson();
 
+    }
+
+    private function getStudentInfoSortedDesc()
+    {
+        // retrieve student data along with scores
+        $students = Student::with('scores')
+            ->get()
+            ->map(function ($student) {
+                // for each student, calculate their latest weekly score
+                $latest_score = $student->scores->reduce(function ($carry, $score) {
+                    if (empty($carry)) {
+                        return $score;
+                    } else {
+                        return $score->week > $carry->week ? $score : $carry;
+                    }
+                });
+
+                if (empty($latest_score)) {
+                    return $student;
+                }
+
+                // assign the scores as new attributes
+                $student->mc = $latest_score->mc;
+                $student->tc = $latest_score->tc;
+                $student->spe = $latest_score->spe;
+                $student->hw = $latest_score->hw;
+                $student->bs = $latest_score->bs;
+                $student->ks = $latest_score->ks;
+                $student->ac = $latest_score->ac;
+                $student->dil = $latest_score->dil;
+                $student->sum = $latest_score->sum;
+
+                // remove bulky weekly data before transfer to client
+                unset($student->scores);
+
+                return $student;
+            });
+
+        // sort the student in descending order
+        $students = $students->sortByDesc('sum');
+
+        return $students;
     }
 }

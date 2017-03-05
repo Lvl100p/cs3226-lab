@@ -15,19 +15,10 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('rank');
-            $table->string('nickname');
             $table->string('name');
             $table->string('flag');
-            $table->integer('mc');
-            $table->integer('tc');
-            $table->integer('spe');
-            $table->integer('hw');
-            $table->integer('bs');
-            $table->integer('ks');
-            $table->integer('ac');
-            $table->integer('dil');
-            $table->integer('sum');
+            $table->string('nickname');
+            $table->string('access')->default('student');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();

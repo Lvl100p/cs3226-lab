@@ -24,39 +24,18 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Student::class, function(Faker\Generator $faker){
-    $rank = $faker->randomNumber(2);
     $nickname = $faker->userName;
     $name = $faker->name;
     $flag = $faker->countryCode;
-    $mc = $faker->randomDigit;
-    $tc = $faker->randomDigit;
-    $spe = $mc + $tc;
-    $hw = $faker->randomDigit;
-    $bs  = $faker->randomDigit;
-    $ks = $faker->randomDigit;
-    $ac  = $faker->randomDigit;
-    $dil  = $hw + $bs + $ks + $ac;
-
-    $sum = $spe + $dil;
 
     $email = $faker->unique()->safeEmail;
     $password = bcrypt('secret');
     $remember_token = str_random('10');
 
     return [
-        'rank' => $rank,
         'nickname' => $nickname,
         'name' => $name,
         'flag' => $flag,
-        'mc' => $mc,
-        'tc' => $tc,
-        'spe'  => $spe,
-        'hw' => $hw,
-        'bs'  => $bs,
-        'ks' => $ks,
-        'ac'  => $ac,
-        'dil'  => $dil,
-        'sum' => $sum,
         'email' => $email,
         'password' => $password,
         'remember_token' => $remember_token

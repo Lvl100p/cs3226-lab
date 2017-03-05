@@ -161,16 +161,17 @@ main {
 .rank,
 .score{
     text-align: center;
+    vertical-align: middle;
     margin-top: 10px;
-    line-height: 35px;
+    line-height: 50px;
     font-weight: bold;
     font-size: 16px;
     color: lightgray;
     background-color: var(--shadow-dirt);
     display: inline-block;
     border-radius: 50%;
-    min-width: 35px;
-    min-height:35px;
+    min-width: 50px;
+    min-height:50px;
 }
 
 .highest-of-column {
@@ -181,7 +182,7 @@ main {
     background-image: url("../img/crown.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 35px 35px;
+    background-size: 50px 50px;
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
