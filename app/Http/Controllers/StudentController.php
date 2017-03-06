@@ -202,16 +202,8 @@ class StudentController extends Controller
         $student = new Student();
         $student->name = $request->fullname;
         $student->nickname = $request->nickname;
+        $student->email = $request->email;
         $student->flag = $request->nationality;
-        $student->mc = 0;
-        $student->tc = 0;
-        $student->spe = 0;
-        $student->hw = 0;
-        $student->bs = 0;
-        $student->ks = 0;
-        $student->ac = 0;
-        $student->dil = 0;
-        $student->sum = 0;
 
         $student->save();
         /*
